@@ -1,0 +1,62 @@
+[
+  {
+    "id": "MKL",
+    "name": "Mikkel Linnet",
+    "role": "Governor",
+    "minted": 148,
+    "held": 22,
+    "cans": 412,
+    "motto": "Weight, measured.",
+    "img": "/img/mkl.jpg"
+  },
+  {
+    "id": "TRK",
+    "name": "Troels Ranum",
+    "role": "Chief Metallurgist",
+    "minted": 121,
+    "held": 31,
+    "cans": 388,
+    "motto": "Temperature is truth.",
+    "img": "/img/trk.jpg"
+  },
+  {
+    "id": "KOM",
+    "name": "Kasper Olfert Møller",
+    "role": "Minter, 2nd Chair",
+    "minted": 96,
+    "held": 44,
+    "cans": 301,
+    "motto": "Strike twice.",
+    "img": "/img/kom.jpg"
+  },
+  {
+    "id": "UFS",
+    "name": "Uffe Schjødt",
+    "role": "Ledger Auditor",
+    "minted": 83,
+    "held": 58,
+    "cans": 266,
+    "motto": "Every can accounted.",
+    "img": "/img/ufs.jpg"
+  },
+  {
+    "id": "MBJ",
+    "name": "Martin Bjærge Jensen",
+    "role": "Smelter",
+    "minted": 134,
+    "held": 18,
+    "cans": 402,
+    "motto": "Heat is capital.",
+    "img": "/img/mbj.jpg"
+  },
+  {
+    "id": "SKP",
+    "name": "Simon Kjær Poulsen",
+    "role": "Treasurer",
+    "minted": 102,
+    "held": 63,
+    "cans": 324,
+    "motto": "We reserve the right.",
+    "img": "/img/skp.jpg"
+  }
+]

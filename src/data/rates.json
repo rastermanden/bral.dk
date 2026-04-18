@@ -1,0 +1,11 @@
+[
+  { "period": "Q1 24", "rate": 1.00 },
+  { "period": "Q2 24", "rate": 1.00 },
+  { "period": "Q3 24", "rate": 1.00 },
+  { "period": "Q4 24", "rate": 1.02, "note": "festive dev." },
+  { "period": "Q1 25", "rate": 1.00 },
+  { "period": "Q2 25", "rate": 1.00 },
+  { "period": "Q3 25", "rate": 0.98, "note": "can shortage" },
+  { "period": "Q4 25", "rate": 1.00 },
+  { "period": "Q1 26", "rate": 1.00 }
+]

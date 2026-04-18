@@ -1,0 +1,8 @@
+[
+  { "sku": "BRL-01", "name": "Proof Set Nº 01 (6 pcs)",   "price": 6, "unit": "bral", "desc": "Wax-sealed, stamped, felt-lined tin" },
+  { "sku": "BRL-02", "name": "Governor's Edition Tee",     "price": 3, "unit": "bral", "desc": "Heavyweight, screen-printed seal" },
+  { "sku": "BRL-03", "name": "Mint Apron (canvas)",        "price": 4, "unit": "bral", "desc": "Pocketed for tongs & pull-tabs" },
+  { "sku": "BRL-04", "name": "Ledger Book, Lined",         "price": 2, "unit": "bral", "desc": "Hand-numbered, 1 of 60" },
+  { "sku": "BRL-05", "name": "Coin Capsule, Brass",        "price": 1, "unit": "bral", "desc": "Fits up to Half Keg" },
+  { "sku": "BRL-06", "name": "Foundry Patch",              "price": 1, "unit": "bral", "desc": "Embroidered, iron-on" }
+]
