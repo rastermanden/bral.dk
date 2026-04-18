@@ -62,9 +62,8 @@
           <rect width="100%" height="100%" fill="url(#cross)" />
         </svg>
 
-        <!-- Drop coin.jpg in public/img/ to show a real photo; the SVG is the fallback -->
         <div class="coin-spin" style="filter:drop-shadow(0 20px 30px rgba(0,0,0,0.35));width:340px;height:340px;position:relative;display:flex;align-items:center;justify-content:center">
-          <TheCoin :denom="heroDenom" :size="320" />
+          <img src="/img/coin.jpg" alt="Bral coin" style="width:100%;height:100%;object-fit:cover;border-radius:50%" />
         </div>
 
         <!-- corner registration marks -->
@@ -82,11 +81,7 @@
 </template>
 
 <script setup>
-import TheCoin from './TheCoin.vue'
-import denominations from '../data/denominations.json'
 import stats from '../data/stats.json'
-
-const heroDenom = denominations[2] // 10 Bral
 
 function fmt(n) { return n.toLocaleString('en-US') }
 
