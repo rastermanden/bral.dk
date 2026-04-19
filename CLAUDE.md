@@ -26,7 +26,7 @@ Playwright tests run against port 5180 (separate from the dev server port 5173).
 
 ### Data-driven sections
 
-All content is stored in `src/data/*.json` files — never hardcode content in components. The one exception is `TheReserves.vue`, which has hardcoded `cans = 2093` and `circulating = 584` (moving these to JSON is a known TODO).
+All content is stored in `src/data/*.json` files — never hardcode content in components.
 
 | File | Purpose |
 |------|---------|
@@ -37,6 +37,7 @@ All content is stored in `src/data/*.json` files — never hardcode content in c
 | `articles.json` | Manifesto articles I–VII |
 | `rates.json` | Historical exchange rate per quarter |
 | `ticker.json` | Marquee ticker items |
+| `stats.json` | Reserve numbers (`canReserve`, `circulating`, `heldByMint`, `ingotsInFoundry`) and audit metadata |
 
 ### Component conventions
 
