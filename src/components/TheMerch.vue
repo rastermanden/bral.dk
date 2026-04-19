@@ -12,8 +12,8 @@
         class="lift merch-item"
         :style="{
           padding: '28px 28px 22px',
-          borderRight: (i + 1) % 3 !== 0 ? '1px solid var(--ink)' : 'none',
-          borderBottom: i < 3 ? '1px solid var(--ink)' : 'none',
+          borderRight: (i + 1) % 3 !== 0 && i !== merch.length - 1 ? '1px solid var(--ink)' : 'none',
+          borderBottom: i < merch.length - (merch.length % 3 || 3) ? '1px solid var(--ink)' : 'none',
           background: 'var(--paper)', position: 'relative'
         }"
       >
