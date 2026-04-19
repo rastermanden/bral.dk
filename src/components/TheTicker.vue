@@ -11,5 +11,5 @@
 import { computed } from 'vue'
 import tickerData from '../data/ticker.json'
 
-const line = computed(() => tickerData.join('   ✦   '))
+const line = computed(() => tickerData.join('   ✦   ') + '   ✦   ')
 </script>

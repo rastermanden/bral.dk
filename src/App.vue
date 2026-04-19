@@ -1,4 +1,5 @@
 <template>
+  <a href="#manifesto" class="skip-link">Skip to content</a>
   <TheHeader />
   <TheTicker />
   <TheHero />
@@ -11,6 +12,7 @@
   <TheMerch />
   <TheHammer />
   <TheFooter />
+  <ThePaletteSwitcher />
 </template>
 
 <script setup>
@@ -25,5 +27,6 @@ import TheSchedule     from './components/TheSchedule.vue'
 import TheMembers      from './components/TheMembers.vue'
 import TheMerch        from './components/TheMerch.vue'
 import TheHammer       from './components/TheHammer.vue'
-import TheFooter       from './components/TheFooter.vue'
+import TheFooter           from './components/TheFooter.vue'
+import ThePaletteSwitcher  from './components/ThePaletteSwitcher.vue'
 </script>

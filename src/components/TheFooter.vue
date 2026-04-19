@@ -18,7 +18,12 @@
 
       <div v-for="[heading, items] in navGroups" :key="heading">
         <div class="mono upper" style="font-size:9px;letter-spacing:0.3em;opacity:0.55;margin-bottom:14px">{{ heading }}</div>
-        <div v-for="it in items" :key="it" style="font-size:12px;padding:4px 0;opacity:0.85;cursor:pointer">{{ it }} ▸</div>
+        <a
+          v-for="it in items"
+          :key="it.label"
+          :href="it.href"
+          class="footer-nav-link"
+        >{{ it.label }} ▸</a>
       </div>
     </div>
 
@@ -59,6 +64,17 @@
     gap: 32px;
   }
 }
+.footer-nav-link {
+  display: block;
+  font-size: 12px;
+  padding: 4px 0;
+  opacity: 0.85;
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+.footer-nav-link:hover { opacity: 1; }
+
 @media (max-width: 640px) {
   .footer-wrap { padding: 40px 20px 24px; }
   .footer-grid {
@@ -76,8 +92,23 @@
 import TheSeal from './TheSeal.vue'
 
 const navGroups = [
-  ['Institution', ['Manifesto', 'Governance', 'Annual Report', 'Audits']],
-  ['Currency',    ['Denominations', 'Exchange Rate', 'Reserves', 'Redemption']],
-  ['Foundry',     ['Mint Schedule', 'Branch Charters', 'Counterfeit Reports', 'Contact']],
+  ['Institution', [
+    { label: 'Manifesto',    href: '#manifesto' },
+    { label: 'Governance',   href: '#members' },
+    { label: 'Annual Report',href: '#reserves' },
+    { label: 'Audits',       href: '#reserves' },
+  ]],
+  ['Currency', [
+    { label: 'Denominations',href: '#mint' },
+    { label: 'Exchange Rate', href: '#rate' },
+    { label: 'Reserves',     href: '#reserves' },
+    { label: 'Redemption',   href: '#schedule' },
+  ]],
+  ['Foundry', [
+    { label: 'Mint Schedule',        href: '#schedule' },
+    { label: 'Branch Charters',      href: '#manifesto' },
+    { label: 'Counterfeit Reports',  href: '#manifesto' },
+    { label: 'Contact',              href: '#members' },
+  ]],
 ]
 </script>
