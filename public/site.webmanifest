@@ -1,0 +1,17 @@
+{
+  "name": "BRAL — The Aluminum Standard",
+  "short_name": "BRAL",
+  "description": "The Aluminum Standard — BRAL currency",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#e9e5db",
+  "theme_color": "#1a1714",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
