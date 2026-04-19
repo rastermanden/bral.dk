@@ -12,6 +12,7 @@
       <a href="#reserves">Reserves</a>
       <a href="#schedule">Schedule</a>
       <a href="#shop">Shop</a>
+      <a href="#hammer">Hammer</a>
     </nav>
     <a href="#manifesto" class="btn btn-ghost header-cta" style="padding:6px 10px;font-size:10px;flex-shrink:0">Redeem ▸</a>
   </header>
