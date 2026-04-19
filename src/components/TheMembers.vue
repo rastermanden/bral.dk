@@ -23,7 +23,7 @@
         <!-- portrait -->
         <div style="aspect-ratio:1;background:var(--paper-2);margin-bottom:12px;position:relative;overflow:hidden;border:1px solid var(--ink)">
           <img
-            :src="m.img"
+            :src="base + m.img.replace(/^\//, '')"
             :alt="m.name"
             :style="{
               width:'100%', height:'100%', objectFit:'cover',
@@ -108,6 +108,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+const base = import.meta.env.BASE_URL
 import SectionHead from './SectionHead.vue'
 import TheSeal from './TheSeal.vue'
 import members from '../data/members.json'

@@ -87,8 +87,6 @@ import TheCoin from './TheCoin.vue'
 import denominations from '../data/denominations.json'
 import stats from '../data/stats.json'
 
-const heroDenom = denominations[2] // 10 Bral
-
 function fmt(n) { return n.toLocaleString('en-US') }
 
 const heroStats = [
