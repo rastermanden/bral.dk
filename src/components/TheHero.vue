@@ -63,8 +63,8 @@
           <rect width="100%" height="100%" fill="url(#cross)" />
         </svg>
 
-        <div class="coin-spin coin-container" style="filter:drop-shadow(0 20px 30px rgba(0,0,0,0.35));position:relative;display:flex;align-items:center;justify-content:center">
-          <TheCoin :denom="heroDenom" :size="coinSize" />
+        <div class="coin-spin coin-container" style="filter:drop-shadow(0 20px 30px rgba(0,0,0,0.35))">
+          <img :src="coinSrc" alt="Ten Bral coin" style="width:100%;height:100%;border-radius:50%;object-fit:cover;display:block" />
         </div>
 
         <!-- corner registration marks -->
@@ -82,9 +82,6 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import TheCoin from './TheCoin.vue'
-import denominations from '../data/denominations.json'
 import stats from '../data/stats.json'
 
 function fmt(n) { return n.toLocaleString('en-US') }
@@ -96,8 +93,7 @@ const heroStats = [
   { key: 'MINTERS',        value: `${stats.minters} licensed`,   sub: `since ${stats.establishedYear}` },
 ]
 
-// Responsive coin size — driven by a CSS custom prop read at runtime
-const coinSize = 320
+const coinSrc = import.meta.env.BASE_URL + 'img/coin.jpg'
 
 function cornerStyle(c) {
   return {

@@ -3,6 +3,7 @@ dist/
 .DS_Store
 *.log
 .vite/
+.env.local
 
 # Playwright
 playwright-report/
