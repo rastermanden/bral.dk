@@ -67,10 +67,17 @@ import schedule from '../data/schedule.json'
   .sched-header,
   .sched-row {
     grid-template-columns: 90px 1fr 90px;
-    gap: 10px;
+    grid-template-rows: auto auto auto;
+    gap: 2px 10px;
     padding: 12px 16px;
   }
-  .sched-notes { display: none; }
+  .sched-date   { grid-column: 1; grid-row: 1 / 3; align-self: start; }
+  .sched-event  { grid-column: 2; grid-row: 1; }
+  .sched-status { grid-column: 3; grid-row: 1 / 3; align-self: start; }
+  .sched-delta  { grid-column: 2; grid-row: 2; font-size: 11px; display: block; }
+  .sched-notes  { grid-column: 2; grid-row: 3; font-size: 11px; display: block; }
+  .sched-header .sched-delta,
+  .sched-header .sched-notes { display: none; }
   .sched-row { padding: 16px; }
 }
 @media (max-width: 640px) {
@@ -78,10 +85,11 @@ import schedule from '../data/schedule.json'
   .sched-header,
   .sched-row {
     grid-template-columns: 80px 1fr auto;
-    gap: 8px;
+    gap: 2px 8px;
     padding: 10px 14px;
   }
-  .sched-delta { display: none; }
-  .sched-event { font-size: 15px !important; }
+  .sched-delta  { font-size: 10px !important; }
+  .sched-notes  { font-size: 10px !important; }
+  .sched-event  { font-size: 15px !important; }
 }
 </style>
