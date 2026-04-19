@@ -1,5 +1,6 @@
 [
-  { "date": "2026.05.03", "event": "SPRING STRIKE Nº 14", "reserve": "+420 cans", "notes": "Members-only, Foundry Garden", "status": "upcoming" },
+  { "date": "2026.04.24", "event": "KLINT STRIKE",        "reserve": "—",          "notes": "Klint",                       "status": "upcoming" },
+  { "date": "2026.05.03", "event": "SPRING STRIKE Nº 14", "reserve": "+420 cans", "notes": "Members-only, Foundry Garden", "status": "scheduled" },
   { "date": "2026.06.21", "event": "SOLSTICE STRIKE",     "reserve": "+680 cans", "notes": "Commemorative ed. issued",     "status": "scheduled" },
   { "date": "2026.07.12", "event": "BEACH BRANCH MINT",   "reserve": "+210 cans", "notes": "Pop-up at Tisvilde",           "status": "scheduled" },
   { "date": "2026.08.30", "event": "HARVEST STRIKE",      "reserve": "+540 cans", "notes": "Fifty-bral proof set",         "status": "scheduled" },
