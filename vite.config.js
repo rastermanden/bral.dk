@@ -5,7 +5,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   return {
     plugins: [vue()],
-    base: '/bral.dk/',
+    base: '/',
     server: {
       port: parseInt(env.VITE_DEV_PORT ?? '5173'),
       strictPort: true,
