@@ -17,18 +17,9 @@
           background: 'var(--paper)', position: 'relative'
         }"
       >
-        <!-- Placeholder image -->
+        <!-- Product illustration -->
         <div style="aspect-ratio:1.2;background:var(--paper-2);margin-bottom:18px;position:relative;overflow:hidden;border:1px solid var(--ink)">
-          <svg viewBox="0 0 120 100" width="100%" height="100%" style="display:block">
-            <defs>
-              <pattern :id="`ms-${item.sku}`" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-                <line x1="0" y1="0" x2="0" y2="6" stroke="var(--ink)" stroke-opacity="0.15" stroke-width="2"/>
-              </pattern>
-            </defs>
-            <rect width="120" height="100" :fill="`url(#ms-${item.sku})`" />
-            <text x="60" y="55" text-anchor="middle" font-family="JetBrains Mono" font-size="6" fill="var(--ink)" opacity="0.55" letter-spacing="2">[ PRODUCT IMAGE ]</text>
-            <text x="60" y="66" text-anchor="middle" font-family="JetBrains Mono" font-size="5" fill="var(--ink)" opacity="0.4" letter-spacing="1">{{ item.sku }}</text>
-          </svg>
+          <MerchArt :sku="item.sku" />
         </div>
 
         <div style="display:flex;justify-content:space-between;align-items:baseline">
@@ -50,6 +41,7 @@
 
 <script setup>
 import SectionHead from './SectionHead.vue'
+import MerchArt from './MerchArt.vue'
 import merch from '../data/merch.json'
 </script>
 
