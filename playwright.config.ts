@@ -6,12 +6,12 @@ export default defineConfig({
   retries: 0,
   reporter: [['html', { open: 'never' }], ['list']],
   use: {
-    baseURL: 'http://localhost:5180/bral.dk/',
+    baseURL: 'http://localhost:5180/',
     browserName: 'chromium',
   },
   webServer: {
     command: 'npx vite --port 5180',
-    url: 'http://localhost:5180/bral.dk/',
+    url: 'http://localhost:5180/',
     reuseExistingServer: true,
     timeout: 60_000,
   },
