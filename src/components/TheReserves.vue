@@ -1,16 +1,16 @@
 <template>
-  <section id="reserves" class="rule-b" style="padding:80px 48px;background:var(--ink);color:var(--paper)">
-    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px">
+  <section id="reserves" class="rule-b reserves-section" style="background:var(--ink);color:var(--paper)">
+    <div class="reserves-header">
       <div>
         <div style="font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--accent);margin-bottom:12px">§ 04</div>
         <h2 class="serif" style="font-size:clamp(40px,5vw,72px);margin:0;line-height:0.95;letter-spacing:-0.02em;font-weight:400">The Reserves</h2>
       </div>
-      <div style="max-width:360px;font-size:12px;line-height:1.6;opacity:0.7;text-align:right">
+      <div class="reserves-subtitle" style="max-width:360px;font-size:12px;line-height:1.6;opacity:0.7">
         Last audited 2026.03.14 by E. Sørensen, non-Minter. Full reserve statement available upon redemption.
       </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:56px;align-items:start">
+    <div class="reserves-grid" style="margin-top:56px;align-items:start">
 
       <!-- Bar charts -->
       <div>
@@ -86,3 +86,32 @@ const bars = [
 
 function fmt(n) { return n.toLocaleString('en-US') }
 </script>
+
+<style scoped>
+.reserves-section { padding: 80px 48px; }
+.reserves-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+}
+.reserves-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+
+@media (max-width: 1024px) {
+  .reserves-section { padding: 60px 32px; }
+  .reserves-grid { gap: 32px; }
+}
+@media (max-width: 768px) {
+  .reserves-section { padding: 60px 24px; }
+  .reserves-header { flex-direction: column; align-items: flex-start; }
+  .reserves-subtitle { text-align: left !important; max-width: 100% !important; }
+  .reserves-grid { grid-template-columns: 1fr; gap: 32px; }
+}
+@media (max-width: 640px) {
+  .reserves-section { padding: 48px 20px; }
+}
+</style>

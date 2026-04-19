@@ -1,15 +1,15 @@
 <template>
-  <section id="shop" class="rule-b" style="padding:80px 48px">
+  <section id="shop" class="rule-b merch-section">
     <SectionHead
       eyebrow="§ 07"
       title="Treasury Shop"
       subtitle="All goods priced in Bral. Payable on site. Non-Bral transactions accepted at Governor's discretion."
     />
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:48px;border:1px solid var(--ink)">
+    <div class="merch-grid" style="margin-top:48px;border:1px solid var(--ink)">
       <div
         v-for="(item, i) in merch"
         :key="item.sku"
-        class="lift"
+        class="lift merch-item"
         :style="{
           padding: '28px 28px 22px',
           borderRight: (i + 1) % 3 !== 0 ? '1px solid var(--ink)' : 'none',
@@ -52,3 +52,25 @@
 import SectionHead from './SectionHead.vue'
 import merch from '../data/merch.json'
 </script>
+
+<style scoped>
+.merch-section { padding: 80px 48px; }
+.merch-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+
+@media (max-width: 768px) {
+  .merch-section { padding: 60px 24px; }
+  .merch-grid { grid-template-columns: repeat(2, 1fr); }
+  .merch-item { border-right: none !important; }
+  .merch-item:nth-child(odd) { border-right: 1px solid var(--ink) !important; }
+}
+@media (max-width: 640px) {
+  .merch-section { padding: 48px 20px; }
+  .merch-grid { grid-template-columns: 1fr; }
+  .merch-item { border-right: none !important; }
+  .merch-item { border-bottom: 1px solid var(--ink) !important; }
+}
+</style>

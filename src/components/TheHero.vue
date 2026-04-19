@@ -1,15 +1,15 @@
 <template>
   <section class="rule-b" style="position:relative;overflow:hidden">
-    <div style="display:grid;grid-template-columns:1.4fr 1fr;min-height:620px">
+    <div class="hero-grid">
 
       <!-- Left: text -->
-      <div class="rule-r" style="padding:48px 48px 140px;position:relative">
+      <div class="rule-r hero-left" style="position:relative">
         <div style="display:flex;gap:14px;align-items:baseline;margin-bottom:26px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase">
           <span style="color:var(--accent)">◆ Nº 001</span>
           <span style="opacity:0.55">— A Communiqué From The Treasury —</span>
         </div>
 
-        <h1 class="serif" style="font-size:clamp(72px,9vw,156px);line-height:0.88;margin:0;letter-spacing:-0.035em;font-weight:400">
+        <h1 class="serif" style="font-size:clamp(48px,9vw,156px);line-height:0.88;margin:0;letter-spacing:-0.035em;font-weight:400">
           One Bral,<br>
           <em style="font-style:italic;color:var(--accent)">one beer.</em><br>
           <span style="opacity:0.85">Forever.</span>
@@ -22,24 +22,25 @@
           weather permitting.
         </p>
 
-        <div style="display:flex;gap:12px;margin-top:28px">
+        <div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap">
           <a href="#rate" class="btn">Convert Currency ▸</a>
           <a href="#mint" class="btn btn-ghost">Inspect the Coin</a>
         </div>
 
         <!-- stamp + signature -->
-        <div style="position:absolute;right:44px;top:120px;text-align:right">
+        <div class="hero-stamp" style="text-align:right">
           <div class="stamp">Ratified · MMXXIV</div>
           <div class="serif" style="margin-top:14px;font-style:italic;font-size:22px;opacity:0.7">M. Linnet</div>
           <div class="mono upper" style="font-size:9px;opacity:0.55;margin-top:2px">Governor, Banco·Bral</div>
         </div>
 
         <!-- stats strip -->
-        <div style="position:absolute;left:0;right:0;bottom:0;border-top:1px solid var(--ink);display:grid;grid-template-columns:repeat(4,1fr);font-family:'JetBrains Mono',monospace">
+        <div class="stats-strip" style="border-top:1px solid var(--ink);font-family:'JetBrains Mono',monospace">
           <div
             v-for="(stat, i) in heroStats"
             :key="stat.key"
-            :style="{ padding:'14px 18px', borderLeft: i === 0 ? 'none' : '1px solid var(--ink)' }"
+            class="stats-item"
+            :style="{ borderLeft: i === 0 ? 'none' : '1px solid var(--ink)' }"
           >
             <div style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.55">{{ stat.key }}</div>
             <div class="serif" style="font-size:26px;line-height:1.1;margin-top:4px">
@@ -51,7 +52,7 @@
       </div>
 
       <!-- Right: spinning coin -->
-      <div style="background:var(--paper-2);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden">
+      <div class="hero-right" style="background:var(--paper-2);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden">
         <!-- crosshatch bg -->
         <svg width="100%" height="100%" style="position:absolute;inset:0;opacity:0.12">
           <defs>
@@ -62,8 +63,8 @@
           <rect width="100%" height="100%" fill="url(#cross)" />
         </svg>
 
-        <div class="coin-spin" style="filter:drop-shadow(0 20px 30px rgba(0,0,0,0.35));width:340px;height:340px;position:relative;display:flex;align-items:center;justify-content:center">
-          <img src="/img/coin.jpg" alt="Bral coin" style="width:100%;height:100%;object-fit:cover;border-radius:50%" />
+        <div class="coin-spin coin-container" style="filter:drop-shadow(0 20px 30px rgba(0,0,0,0.35));position:relative;display:flex;align-items:center;justify-content:center">
+          <TheCoin :denom="heroDenom" :size="coinSize" />
         </div>
 
         <!-- corner registration marks -->
@@ -81,6 +82,9 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
+import TheCoin from './TheCoin.vue'
+import denominations from '../data/denominations.json'
 import stats from '../data/stats.json'
 
 function fmt(n) { return n.toLocaleString('en-US') }
@@ -91,6 +95,9 @@ const heroStats = [
   { key: 'CAN RESERVE',    value: `${fmt(stats.canReserve)} ░`,  sub: `${stats.purity}% pure` },
   { key: 'MINTERS',        value: `${stats.minters} licensed`,   sub: `since ${stats.establishedYear}` },
 ]
+
+// Responsive coin size — driven by a CSS custom prop read at runtime
+const coinSize = 320
 
 function cornerStyle(c) {
   return {
@@ -115,3 +122,59 @@ function cornerDotStyle(c) {
   }
 }
 </script>
+
+<style scoped>
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  min-height: 620px;
+}
+.hero-left {
+  padding: 48px 48px 160px;
+}
+.hero-stamp {
+  position: absolute;
+  right: 44px;
+  top: 120px;
+}
+.stats-strip {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.stats-item {
+  padding: 14px 18px;
+}
+.coin-container {
+  width: 340px;
+  height: 340px;
+}
+.hero-right {
+  min-height: 400px;
+}
+
+@media (max-width: 1024px) {
+  .hero-left { padding: 40px 32px 140px; }
+  .hero-stamp { right: 28px; top: 80px; }
+  .coin-container { width: 260px; height: 260px; }
+}
+@media (max-width: 768px) {
+  .hero-grid { grid-template-columns: 1fr; min-height: auto; }
+  .hero-left { padding: 40px 24px 24px; border-right: none !important; }
+  .hero-stamp { display: none; }
+  .stats-strip {
+    position: static;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 32px;
+  }
+  .hero-right { min-height: 320px; }
+  .coin-container { width: 220px; height: 220px; }
+}
+@media (max-width: 640px) {
+  .hero-left { padding: 32px 20px 20px; }
+  .stats-item { padding: 12px 14px; }
+  .hero-right { min-height: 260px; }
+  .coin-container { width: 180px; height: 180px; }
+}
+</style>

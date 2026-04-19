@@ -1,5 +1,5 @@
 <template>
-  <section id="members" class="rule-b" style="padding:80px 48px;background:var(--paper-2)">
+  <section id="members" class="rule-b members-section" style="background:var(--paper-2)">
     <SectionHead
       eyebrow="§ 06"
       title="The Mint Roster"
@@ -7,17 +7,17 @@
     />
 
     <!-- Member tabs -->
-    <div style="display:grid;grid-template-columns:repeat(6,1fr);margin-top:48px;border:1px solid var(--ink)">
+    <div class="member-tabs" style="margin-top:48px;border:1px solid var(--ink)">
       <button
         v-for="(m, i) in members"
         :key="m.id"
         @click="selIdx = i"
+        class="member-tab-btn"
         :style="{
           background: selIdx === i ? 'var(--ink)' : 'var(--paper)',
           color:      selIdx === i ? 'var(--paper)' : 'var(--ink)',
-          border: 'none',
           borderRight: i < 5 ? '1px solid var(--ink)' : 'none',
-          padding: '20px 16px', cursor: 'pointer', textAlign: 'left'
+          borderBottom: '1px solid var(--ink)',
         }"
       >
         <!-- portrait -->
@@ -60,10 +60,10 @@
     </div>
 
     <!-- Detail panels -->
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:1px solid var(--ink);border-top:none">
+    <div class="member-panels" style="border:1px solid var(--ink);border-top:none">
 
       <!-- Bio -->
-      <div class="rule-r" style="padding:32px">
+      <div class="rule-r member-panel" style="padding:32px">
         <div class="mono upper" style="font-size:10px;letter-spacing:0.2em;color:var(--accent)">Licensed Minter · {{ sel.id }}</div>
         <div class="serif" style="font-size:44px;line-height:1;margin:10px 0;letter-spacing:-0.02em">{{ sel.name }}</div>
         <div class="mono upper" style="font-size:10px;letter-spacing:0.2em;opacity:0.6;margin-top:6px">{{ sel.role }}</div>
@@ -71,7 +71,7 @@
       </div>
 
       <!-- Stats -->
-      <div class="rule-r" style="padding:32px">
+      <div class="rule-r member-panel" style="padding:32px">
         <div class="mono upper" style="font-size:10px;letter-spacing:0.2em;opacity:0.6;margin-bottom:18px">Statistics, to Date</div>
         <div v-for="[label, val, max] in statsFor(sel)" :key="label" style="margin-bottom:16px">
           <div style="display:flex;justify-content:space-between;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:4px">
@@ -85,7 +85,7 @@
       </div>
 
       <!-- Certificate -->
-      <div style="padding:32px">
+      <div class="member-panel" style="padding:32px">
         <div class="mono upper" style="font-size:10px;letter-spacing:0.2em;opacity:0.6;margin-bottom:18px">Certification of Authority</div>
         <div style="border:1px solid var(--ink);padding:22px 20px;background:var(--paper);position:relative">
           <div class="serif" style="font-size:22px;line-height:1.2;font-style:italic;margin-bottom:14px">
@@ -124,3 +124,44 @@ function statsFor(m) {
   ]
 }
 </script>
+
+<style scoped>
+.members-section { padding: 80px 48px; }
+.member-tabs {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+.member-tab-btn {
+  border: none;
+  padding: 20px 16px;
+  cursor: pointer;
+  text-align: left;
+}
+.member-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+}
+
+@media (max-width: 1024px) {
+  .members-section { padding: 60px 32px; }
+}
+@media (max-width: 768px) {
+  .members-section { padding: 60px 24px; }
+  .member-tabs { grid-template-columns: repeat(3, 1fr); }
+  .member-tab-btn:nth-child(3) { border-right: none !important; }
+  .member-tab-btn:nth-child(6) { border-right: none !important; }
+  .member-tab-btn:nth-child(n+4) { border-bottom: none !important; }
+  .member-panels { grid-template-columns: 1fr; }
+  .member-panel { border-right: none !important; border-bottom: 1px solid var(--ink); }
+  .member-panel:last-child { border-bottom: none; }
+}
+@media (max-width: 640px) {
+  .members-section { padding: 48px 20px; }
+  .member-tabs { grid-template-columns: repeat(2, 1fr); }
+  .member-tab-btn:nth-child(2) { border-right: none !important; }
+  .member-tab-btn:nth-child(4) { border-right: none !important; }
+  .member-tab-btn:nth-child(6) { border-right: none !important; }
+  .member-tab-btn { padding: 14px 12px; }
+}
+</style>
