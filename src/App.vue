@@ -9,6 +9,7 @@
   <TheSchedule />
   <TheMembers />
   <TheMerch />
+  <TheHammer />
   <TheFooter />
 </template>
 
@@ -23,5 +24,6 @@ import TheReserves     from './components/TheReserves.vue'
 import TheSchedule     from './components/TheSchedule.vue'
 import TheMembers      from './components/TheMembers.vue'
 import TheMerch        from './components/TheMerch.vue'
+import TheHammer       from './components/TheHammer.vue'
 import TheFooter       from './components/TheFooter.vue'
 </script>
