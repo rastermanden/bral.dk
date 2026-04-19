@@ -13,6 +13,7 @@
       <a href="#schedule">Schedule</a>
       <a href="#shop">Shop</a>
       <a href="#hammer">Hammer</a>
+      <a href="#newsletter">Communiqué</a>
     </nav>
     <a href="#manifesto" class="btn btn-ghost header-cta" style="padding:6px 10px;font-size:10px;flex-shrink:0">Redeem ▸</a>
 
@@ -39,7 +40,8 @@
         <a href="#reserves"  @click="menuOpen = false">Reserves</a>
         <a href="#schedule"  @click="menuOpen = false">Schedule</a>
         <a href="#shop"      @click="menuOpen = false">Shop</a>
-        <a href="#hammer"    @click="menuOpen = false">Hammer</a>
+        <a href="#hammer"      @click="menuOpen = false">Hammer</a>
+        <a href="#newsletter" @click="menuOpen = false">Communiqué</a>
       </nav>
       <a href="#manifesto" class="btn mobile-menu-cta" @click="menuOpen = false">Redeem ▸</a>
     </div>
