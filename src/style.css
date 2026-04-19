@@ -18,6 +18,10 @@ html, body {
   color: var(--ink);
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 13px;
