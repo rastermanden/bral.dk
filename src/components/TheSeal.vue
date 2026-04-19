@@ -1,5 +1,5 @@
 <template>
-  <svg :width="size" :height="size" viewBox="0 0 40 40">
+  <svg :width="size" :height="size" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
     <circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1" />
     <circle cx="20" cy="20" r="15" fill="none" stroke="currentColor" stroke-width="0.5" />
     <text x="20" y="24" text-anchor="middle" font-family="Instrument Serif, serif" font-size="16" fill="currentColor">B</text>

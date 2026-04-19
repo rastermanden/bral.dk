@@ -1,8 +1,8 @@
 [
-  { "sku": "BRL-01", "name": "Proof Set Nº 01 (6 pcs)",   "price": 6, "unit": "bral", "desc": "Wax-sealed, stamped, felt-lined tin" },
-  { "sku": "BRL-02", "name": "Governor's Edition Tee",     "price": 3, "unit": "bral", "desc": "Heavyweight, screen-printed seal" },
-  { "sku": "BRL-03", "name": "Mint Apron (canvas)",        "price": 4, "unit": "bral", "desc": "Pocketed for tongs & pull-tabs" },
-  { "sku": "BRL-04", "name": "Ledger Book, Lined",         "price": 2, "unit": "bral", "desc": "Hand-numbered, 1 of 60" },
-  { "sku": "BRL-05", "name": "Coin Capsule, Brass",        "price": 1, "unit": "bral", "desc": "Fits up to Half Keg" },
-  { "sku": "BRL-06", "name": "Foundry Patch",              "price": 1, "unit": "bral", "desc": "Embroidered, iron-on" }
+  { "sku": "BRL-01", "name": "Proof Set Nº 01 (6 pcs)",   "price": 6, "unit": "bral", "desc": "All six denominations, hand-struck from the inaugural session. Wax-sealed in a stamped, felt-lined tin. Each set individually numbered and signed by the presiding Governor." },
+  { "sku": "BRL-02", "name": "Governor's Edition Tee",     "price": 3, "unit": "bral", "desc": "Heavyweight 280gsm cotton, screen-printed with the Banco·Bral seal in one-colour ink. Cut for the serious monetary official. Unisex sizing, Loshult Foundry imprint at hem." },
+  { "sku": "BRL-03", "name": "Mint Apron (canvas)",        "price": 4, "unit": "bral", "desc": "Waxed canvas, single cross-back strap. Two deep front pockets sized for tongs, pull-tabs, and the current session ledger. Heat and splatter resistant. Not dishwasher safe." },
+  { "sku": "BRL-04", "name": "Ledger Book, Lined",         "price": 2, "unit": "bral", "desc": "A5 format, 96 pages, cream stock, sewn binding. Hand-numbered 1 of 60 on the colophon page. Suitable for mint records, reserve calculations, and promissory notes." },
+  { "sku": "BRL-05", "name": "Coin Capsule, Brass",        "price": 1, "unit": "bral", "desc": "Airtight brass capsule, museum-grade. Accommodates all denominations up to the Half Keg (50 Bral). Keeps oxidation and beer away from your holdings." },
+  { "sku": "BRL-06", "name": "Foundry Patch",              "price": 1, "unit": "bral", "desc": "Embroidered twill, 7cm diameter. Iron-on or stitch-on. Depicts the Banco·Bral seal in silver thread on black ground. Limited run; no reissue planned." }
 ]
