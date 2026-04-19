@@ -101,7 +101,7 @@ The design has four palette variants defined in the prototype. If needed, implem
 - **Hero coin**: SVG coin renders until `public/img/coin.jpg` is placed
 - **Member portraits**: show as blank until `public/img/<id>.jpg` photos are added
 - **Merch images**: hatched SVG placeholders — replace with real product photos by adding `<img>` tags in `TheMerch.vue`
-- **Reserves numbers** (`TheReserves.vue`): hardcoded (`cans = 2093`, `circulating = 584`). Move to a JSON file if these need frequent updates.
+- **Reserves numbers** (`TheReserves.vue`): sourced from `src/data/stats.json` — update `canReserve`, `circulating`, `heldByMint`, `ingotsInFoundry` there.
 
 ---
 
