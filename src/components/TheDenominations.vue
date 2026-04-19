@@ -1,29 +1,26 @@
 <template>
-  <section id="mint" class="rule-b" style="padding:80px 48px;position:relative">
+  <section id="mint" class="rule-b denom-section">
     <SectionHead
       eyebrow="§ 03"
       title="The Denominations"
       subtitle="Six tenders, struck by hand. Diameter, mass, edge, and legend as specified by the Mint."
     />
 
-    <div style="display:grid;grid-template-columns:1fr 1.3fr;gap:48px;margin-top:56px">
+    <div class="denom-outer-grid" style="margin-top:56px">
 
       <!-- Coin grid -->
       <div style="border:1px solid var(--ink);background:var(--paper-2)">
-        <div style="display:grid;grid-template-columns:1fr 1fr">
+        <div class="coin-btn-grid">
           <button
             v-for="(d, i) in denoms"
             :key="d.value"
             @click="sel = d"
-            class="lift"
+            class="lift coin-btn"
             :style="{
-              padding: '28px 20px',
               background: sel.value === d.value ? 'var(--paper)' : 'transparent',
               border: 'none',
               borderRight: i % 2 === 0 ? '1px solid var(--ink)' : 'none',
               borderBottom: i < 4 ? '1px solid var(--ink)' : 'none',
-              display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px',
-              cursor: 'pointer', position: 'relative'
             }"
           >
             <div v-if="sel.value === d.value" style="position:absolute;top:8px;left:10px;width:6px;height:6px;background:var(--accent)" />
@@ -36,16 +33,16 @@
 
       <!-- Detail -->
       <div style="position:relative">
-        <div style="display:flex;align-items:flex-start;gap:30px">
-          <div style="flex-shrink:0">
+        <div class="denom-detail">
+          <div style="flex-shrink:0;text-align:center">
             <TheCoin :denom="sel" :size="220" />
             <div class="mono upper" style="font-size:9px;letter-spacing:0.2em;margin-top:10px;opacity:0.55;text-align:center">
               Obverse · actual size × 1.4
             </div>
           </div>
-          <div style="flex:1">
+          <div style="flex:1;min-width:0">
             <div class="mono upper" style="font-size:10px;letter-spacing:0.2em;color:var(--accent)">Specimen · {{ sel.name }}</div>
-            <div class="serif" style="font-size:72px;line-height:0.95;letter-spacing:-0.02em;margin:10px 0">
+            <div class="serif" style="font-size:clamp(48px,6vw,72px);line-height:0.95;letter-spacing:-0.02em;margin:10px 0">
               {{ sel.value }}<span style="font-size:24px;opacity:0.5;margin-left:8px">bral</span>
             </div>
 
@@ -63,7 +60,7 @@
               </tbody>
             </table>
 
-            <div style="margin-top:22px;display:flex;gap:10px">
+            <div style="margin-top:22px;display:flex;gap:10px;flex-wrap:wrap">
               <a href="#schedule" class="btn">Acquire at next strike ▸</a>
               <button class="btn btn-ghost">Download spec sheet</button>
             </div>
@@ -97,3 +94,45 @@ function specsFor(d) {
   ]
 }
 </script>
+
+<style scoped>
+.denom-section { padding: 80px 48px; }
+.denom-outer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 48px;
+}
+.coin-btn-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.coin-btn {
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  position: relative;
+}
+.denom-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+@media (max-width: 1024px) {
+  .denom-section { padding: 60px 32px; }
+  .denom-outer-grid { gap: 32px; }
+}
+@media (max-width: 768px) {
+  .denom-section { padding: 60px 24px; }
+  .denom-outer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .denom-detail { flex-direction: column; align-items: center; }
+}
+@media (max-width: 640px) {
+  .denom-section { padding: 48px 20px; }
+  .coin-btn { padding: 18px 12px; }
+  .denom-outer-grid { gap: 24px; }
+}
+</style>

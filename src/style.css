@@ -113,3 +113,11 @@ a { color: inherit; text-decoration: none; }
 
 /* Range input */
 input[type="range"] { accent-color: var(--accent); }
+
+/* Responsive base */
+@media (max-width: 768px) {
+  body { font-size: 12px; }
+}
+
+/* Preserve marquee track sizing */
+.marquee-track { flex-shrink: 0; }

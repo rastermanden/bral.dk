@@ -1,15 +1,15 @@
 <template>
-  <section id="rate" class="rule-b" style="padding:80px 48px;background:var(--paper-2);position:relative">
+  <section id="rate" class="rule-b exchange-section" style="background:var(--paper-2);position:relative">
     <SectionHead
       eyebrow="§ 02"
       title="The Exchange"
       subtitle="The peg is fixed. The chart, accordingly, is boring. We have left it on the wall regardless."
     />
 
-    <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:0;margin-top:56px;border:1px solid var(--ink);background:var(--paper)">
+    <div class="exchange-grid" style="margin-top:56px;border:1px solid var(--ink);background:var(--paper)">
 
       <!-- Calculator -->
-      <div class="rule-r" style="padding:36px 40px">
+      <div class="rule-r exchange-calc" style="padding:36px 40px">
         <div style="font-size:10px;letter-spacing:0.3em;text-transform:uppercase;opacity:0.6;margin-bottom:8px">Official Conversion Engine</div>
         <div class="serif" style="font-size:34px;line-height:1.1;letter-spacing:-0.01em;margin-bottom:28px">
           Convert between <em>Bral</em> and <em>Beer</em>.
@@ -54,15 +54,15 @@
           </div>
         </div>
 
-        <div class="mono" style="font-size:10px;margin-top:14px;display:flex;justify-content:space-between;opacity:0.7">
+        <div class="mono exchange-footer" style="font-size:10px;margin-top:14px;display:flex;justify-content:space-between;opacity:0.7">
           <span>Rate · 1.00000 · fixed</span>
           <span>Fee · 0.000 · gratis</span>
-          <span>Quoted · {{ today }} 19:04 CET</span>
+          <span class="exchange-footer-date">Quoted · {{ today }} 19:04 CET</span>
         </div>
       </div>
 
       <!-- Chart -->
-      <div style="padding:36px 40px;position:relative">
+      <div class="exchange-chart" style="padding:36px 40px;position:relative">
         <div style="font-size:10px;letter-spacing:0.3em;text-transform:uppercase;opacity:0.6;margin-bottom:8px">Historical Rate · BRAL / BEER</div>
         <div class="serif" style="font-size:34px;line-height:1.1;margin-bottom:28px">Stability, <em>by design</em>.</div>
 
@@ -143,3 +143,29 @@ const chartStats = [
   { label: 'REDEMPTION SUCCESS', value: '100%' },
 ]
 </script>
+
+<style scoped>
+.exchange-section { padding: 80px 48px; }
+.exchange-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 0;
+}
+
+@media (max-width: 1024px) {
+  .exchange-section { padding: 60px 32px; }
+  .exchange-calc { padding: 28px 28px !important; }
+  .exchange-chart { padding: 28px 28px !important; }
+}
+@media (max-width: 768px) {
+  .exchange-section { padding: 60px 24px; }
+  .exchange-grid { grid-template-columns: 1fr; }
+  .exchange-calc { border-right: none !important; }
+  .exchange-footer-date { display: none; }
+}
+@media (max-width: 640px) {
+  .exchange-section { padding: 48px 20px; }
+  .exchange-calc { padding: 24px 20px !important; }
+  .exchange-chart { padding: 24px 20px !important; }
+}
+</style>
