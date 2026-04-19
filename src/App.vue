@@ -11,6 +11,7 @@
   <TheMembers />
   <TheMerch />
   <TheHammer />
+  <TheNewsletter />
   <TheFooter />
   <ThePaletteSwitcher />
 </template>
@@ -27,6 +28,7 @@ import TheSchedule     from './components/TheSchedule.vue'
 import TheMembers      from './components/TheMembers.vue'
 import TheMerch        from './components/TheMerch.vue'
 import TheHammer       from './components/TheHammer.vue'
+import TheNewsletter   from './components/TheNewsletter.vue'
 import TheFooter           from './components/TheFooter.vue'
 import ThePaletteSwitcher  from './components/ThePaletteSwitcher.vue'
 </script>
