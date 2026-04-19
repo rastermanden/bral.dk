@@ -1,17 +1,59 @@
 {
-  "name": "BRAL — The Aluminum Standard",
+  "name": "Banco·Bral — The Aluminum Standard",
   "short_name": "BRAL",
-  "description": "The Aluminum Standard — BRAL currency",
+  "description": "The world's first artisanal fiat currency. Struck by hand from recycled beer cans in Loshult, Småland.",
   "start_url": "/",
+  "scope": "/",
+  "id": "/",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
   "background_color": "#e9e5db",
   "theme_color": "#1a1714",
+  "categories": ["finance", "lifestyle"],
+  "lang": "en",
+  "dir": "ltr",
   "icons": [
     {
       "src": "/icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Denominations",
+      "short_name": "Coins",
+      "description": "Browse the six denominations of Bral",
+      "url": "/#mint",
+      "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    },
+    {
+      "name": "Exchange Rate",
+      "short_name": "Rate",
+      "description": "Today's Bral exchange rate",
+      "url": "/#rate",
+      "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    },
+    {
+      "name": "Hammer the Mint",
+      "short_name": "Hammer",
+      "description": "Strike a coin yourself",
+      "url": "/#hammer",
+      "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml" }]
     }
   ]
 }

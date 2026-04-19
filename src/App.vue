@@ -14,6 +14,7 @@
   <TheNewsletter />
   <TheFooter />
   <ThePaletteSwitcher />
+  <TheInstallPrompt />
 </template>
 
 <script setup>
@@ -31,4 +32,5 @@ import TheHammer       from './components/TheHammer.vue'
 import TheNewsletter   from './components/TheNewsletter.vue'
 import TheFooter           from './components/TheFooter.vue'
 import ThePaletteSwitcher  from './components/ThePaletteSwitcher.vue'
+import TheInstallPrompt    from './components/TheInstallPrompt.vue'
 </script>
