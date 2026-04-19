@@ -1,0 +1,31 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="g" cx="40%" cy="35%" r="75%">
+      <stop offset="0%" stop-color="#f2efe8" />
+      <stop offset="55%" stop-color="#c9c5be" />
+      <stop offset="100%" stop-color="#77736c" />
+    </radialGradient>
+    <radialGradient id="gi" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#d4cfc5" />
+      <stop offset="100%" stop-color="#c9c5be" />
+    </radialGradient>
+    <path id="arc-top" d="M 12 256 A 244 244 0 0 1 500 256" />
+    <path id="arc-bot" d="M 500 256 A 244 244 0 0 1 12 256" />
+  </defs>
+  <!-- coin body -->
+  <circle cx="256" cy="256" r="255" fill="url(#g)" stroke="#8a857b" stroke-width="1" />
+  <circle cx="256" cy="256" r="250" fill="url(#gi)" stroke="#6f6b63" stroke-width="0.5" />
+  <!-- inner dot ring -->
+  <circle cx="256" cy="256" r="246" fill="none" stroke="#4a4741" stroke-width="1.5" stroke-dasharray="1.5 37.1" />
+  <!-- numeral -->
+  <text x="256" y="284" text-anchor="middle" font-family="Georgia, serif" font-size="215" fill="#2a2724" style="letter-spacing: -0.02em">1</text>
+  <!-- arc labels -->
+  <text font-family="Courier New, monospace" font-size="36" fill="#2a2724" letter-spacing="2">
+    <textPath href="#arc-top" start-offset="50%" text-anchor="middle">BANCO · BRAL</textPath>
+  </text>
+  <text font-family="Courier New, monospace" font-size="36" fill="#2a2724" letter-spacing="2">
+    <textPath href="#arc-bot" start-offset="50%" text-anchor="middle">A.D. 2024</textPath>
+  </text>
+  <!-- specular highlight -->
+  <ellipse cx="179" cy="141" rx="115" ry="46" fill="white" opacity="0.15" />
+</svg>
