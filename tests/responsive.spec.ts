@@ -84,6 +84,12 @@ test('reserves section is visible', async ({ page }) => {
   await expect(page.locator('#reserves')).toBeVisible()
 })
 
+test('address section is visible', async ({ page }) => {
+  await page.locator('#address').scrollIntoViewIfNeeded()
+  await expect(page.locator('#address')).toBeVisible()
+  await expect(page.locator('#address video')).toBeVisible()
+})
+
 test('schedule section is visible', async ({ page }) => {
   await page.locator('#schedule').scrollIntoViewIfNeeded()
   await expect(page.locator('#schedule')).toBeVisible()
