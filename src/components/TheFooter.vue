@@ -37,7 +37,7 @@
 
 <style scoped>
 .footer-wrap {
-  padding: 56px 48px 32px;
+  padding: 56px 48px 80px;
   background: var(--ink);
   color: var(--paper);
 }
@@ -58,7 +58,7 @@
   opacity: 0.6;
 }
 @media (max-width: 768px) {
-  .footer-wrap { padding: 48px 24px 28px; }
+  .footer-wrap { padding: 48px 24px 80px; }
   .footer-grid {
     grid-template-columns: 1fr 1fr;
     gap: 32px;
@@ -76,7 +76,7 @@
 .footer-nav-link:hover { opacity: 1; }
 
 @media (max-width: 640px) {
-  .footer-wrap { padding: 40px 20px 24px; }
+  .footer-wrap { padding: 40px 20px 96px; }
   .footer-grid {
     grid-template-columns: 1fr;
     gap: 28px;
