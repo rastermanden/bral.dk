@@ -9,6 +9,7 @@
   <TheReserves />
   <TheSchedule />
   <TheMembers />
+  <TheGovernors />
   <TheMerch />
   <TheHammer />
   <TheNewsletter />
@@ -27,6 +28,7 @@ import TheDenominations from './components/TheDenominations.vue'
 import TheReserves     from './components/TheReserves.vue'
 import TheSchedule     from './components/TheSchedule.vue'
 import TheMembers      from './components/TheMembers.vue'
+import TheGovernors    from './components/TheGovernors.vue'
 import TheMerch        from './components/TheMerch.vue'
 import TheHammer       from './components/TheHammer.vue'
 import TheNewsletter   from './components/TheNewsletter.vue'

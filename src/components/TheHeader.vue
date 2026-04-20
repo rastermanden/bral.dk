@@ -12,6 +12,7 @@
       <a href="#reserves">Reserves</a>
       <a href="#schedule">Schedule</a>
       <a href="#shop">Shop</a>
+      <a href="#governors">Governors</a>
       <a href="#hammer">Hammer</a>
       <a href="#newsletter">Communiqué</a>
     </nav>
@@ -40,6 +41,7 @@
         <a href="#reserves"  @click="menuOpen = false">Reserves</a>
         <a href="#schedule"  @click="menuOpen = false">Schedule</a>
         <a href="#shop"      @click="menuOpen = false">Shop</a>
+        <a href="#governors" @click="menuOpen = false">Governors</a>
         <a href="#hammer"      @click="menuOpen = false">Hammer</a>
         <a href="#newsletter" @click="menuOpen = false">Communiqué</a>
       </nav>

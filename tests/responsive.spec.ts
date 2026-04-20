@@ -147,6 +147,28 @@ test('members: clicking a tab shows that member', async ({ page }) => {
   await expect(page.locator('.member-panels')).toBeVisible()
 })
 
+// ── Governors ─────────────────────────────────────────────────────────────────
+
+test('governors section is visible', async ({ page }) => {
+  await page.locator('#governors').scrollIntoViewIfNeeded()
+  await expect(page.locator('#governors')).toBeVisible()
+})
+
+test('governors: roster renders all seats plus header row', async ({ page }) => {
+  await page.locator('#governors').scrollIntoViewIfNeeded()
+  const rows = page.locator('#governors .gov-row')
+  await expect(rows).toHaveCount(6)
+})
+
+test('governors: clauses responsive grid', async ({ page }) => {
+  const viewport = page.viewportSize()!
+  await page.locator('#governors').scrollIntoViewIfNeeded()
+  const cols = await page
+    .locator('#governors .gov-clauses')
+    .evaluate(el => getComputedStyle(el).gridTemplateColumns.trim().split(' ').length)
+  expect(cols).toBe(viewport.width <= 768 ? 1 : 2)
+})
+
 // ── Merch ─────────────────────────────────────────────────────────────────────
 
 test('merch: products are visible', async ({ page }) => {
