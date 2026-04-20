@@ -7,11 +7,17 @@
     />
 
     <!-- Member tabs -->
-    <div class="member-tabs" style="margin-top:48px;border:1px solid var(--ink)">
+    <div class="member-tabs" role="tablist" aria-label="Mint roster" style="margin-top:48px;border:1px solid var(--ink)">
       <button
         v-for="(m, i) in members"
         :key="m.id"
+        :id="`member-tab-${m.id}`"
+        role="tab"
+        :aria-selected="selIdx === i"
+        :aria-controls="`member-panel-${m.id}`"
+        :tabindex="selIdx === i ? 0 : -1"
         @click="selIdx = i"
+        @keydown="onTabKey"
         class="member-tab-btn"
         :style="{
           background: selIdx === i ? 'var(--ink)' : 'var(--paper)',
@@ -54,25 +60,31 @@
           <div v-if="selIdx === i" style="position:absolute;bottom:6px;right:6px;width:8px;height:8px;background:var(--accent)" />
         </div>
 
-        <div class="mono upper" style="font-size:9px;letter-spacing:0.2em;opacity:0.6">{{ m.role }}</div>
+        <div class="mono upper" style="font-size:9px;letter-spacing:0.2em;opacity:0.78">{{ m.role }}</div>
         <div class="serif" style="font-size:20px;line-height:1.1;margin-top:4px">{{ m.name.split(' ')[0] }}</div>
       </button>
     </div>
 
     <!-- Detail panels -->
-    <div class="member-panels" style="border:1px solid var(--ink);border-top:none">
+    <div
+      class="member-panels"
+      role="tabpanel"
+      :id="`member-panel-${sel.id}`"
+      :aria-labelledby="`member-tab-${sel.id}`"
+      style="border:1px solid var(--ink);border-top:none"
+    >
 
       <!-- Bio -->
       <div class="rule-r member-panel" style="padding:32px">
         <div class="mono upper" style="font-size:10px;letter-spacing:0.2em;color:var(--accent)">Licensed Minter · {{ sel.id }}</div>
         <div class="serif" style="font-size:44px;line-height:1;margin:10px 0;letter-spacing:-0.02em">{{ sel.name }}</div>
-        <div class="mono upper" style="font-size:10px;letter-spacing:0.2em;opacity:0.6;margin-top:6px">{{ sel.role }}</div>
+        <div class="mono upper" style="font-size:10px;letter-spacing:0.2em;opacity:0.78;margin-top:6px">{{ sel.role }}</div>
         <div class="serif" style="font-size:22px;font-style:italic;margin-top:22px;opacity:0.85">"{{ sel.motto }}"</div>
       </div>
 
       <!-- Stats -->
       <div class="rule-r member-panel" style="padding:32px">
-        <div class="mono upper" style="font-size:10px;letter-spacing:0.2em;opacity:0.6;margin-bottom:18px">Statistics, to Date</div>
+        <div class="mono upper" style="font-size:10px;letter-spacing:0.2em;opacity:0.78;margin-bottom:18px">Statistics, to Date</div>
         <div v-for="[label, val, max] in statsFor(sel)" :key="label" style="margin-bottom:16px">
           <div style="display:flex;justify-content:space-between;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:4px">
             <span>{{ label }}</span>
@@ -86,7 +98,7 @@
 
       <!-- Certificate -->
       <div class="member-panel" style="padding:32px">
-        <div class="mono upper" style="font-size:10px;letter-spacing:0.2em;opacity:0.6;margin-bottom:18px">Certification of Authority</div>
+        <div class="mono upper" style="font-size:10px;letter-spacing:0.2em;opacity:0.78;margin-bottom:18px">Certification of Authority</div>
         <div style="border:1px solid var(--ink);padding:22px 20px;background:var(--paper);position:relative">
           <div class="serif" style="font-size:22px;line-height:1.2;font-style:italic;margin-bottom:14px">
             Let it be known that <strong style="font-style:normal">{{ sel.name }}</strong> is duly licensed to strike, assay, and countersign Bral coin in the name of the Banco·Bral.
@@ -94,7 +106,7 @@
           <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:18px">
             <div>
               <div class="serif" style="font-style:italic;font-size:18px">M. Linnet</div>
-              <div class="mono upper" style="font-size:8px;letter-spacing:0.2em;opacity:0.55">Governor</div>
+              <div class="mono upper" style="font-size:8px;letter-spacing:0.2em;opacity:0.78">Governor</div>
             </div>
             <TheSeal :size="44" />
           </div>
@@ -122,6 +134,16 @@ function statsFor(m) {
     ['Currently Held',    m.held,    80],
     ['Cans Contributed',  m.cans,   500],
   ]
+}
+
+function onTabKey(e) {
+  const max = members.length - 1
+  if (e.key === 'ArrowRight') { selIdx.value = selIdx.value === max ? 0 : selIdx.value + 1; e.preventDefault() }
+  else if (e.key === 'ArrowLeft') { selIdx.value = selIdx.value === 0 ? max : selIdx.value - 1; e.preventDefault() }
+  else if (e.key === 'Home') { selIdx.value = 0; e.preventDefault() }
+  else if (e.key === 'End')  { selIdx.value = max; e.preventDefault() }
+  else return
+  document.getElementById(`member-tab-${members[selIdx.value].id}`)?.focus()
 }
 </script>
 

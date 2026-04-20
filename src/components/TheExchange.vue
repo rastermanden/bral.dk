@@ -10,46 +10,55 @@
 
       <!-- Calculator -->
       <div class="rule-r exchange-calc" style="padding:36px 40px">
-        <div style="font-size:10px;letter-spacing:0.3em;text-transform:uppercase;opacity:0.6;margin-bottom:8px">Official Conversion Engine</div>
+        <div style="font-size:10px;letter-spacing:0.3em;text-transform:uppercase;opacity:0.78;margin-bottom:8px">Official Conversion Engine</div>
         <div class="serif" style="font-size:34px;line-height:1.1;letter-spacing:-0.01em;margin-bottom:28px">
           Convert between <em>Bral</em> and <em>Beer</em>.
         </div>
 
-        <div style="display:flex;align-items:stretch;border:1px solid var(--ink);margin-bottom:20px">
+        <div role="group" aria-label="Conversion direction" style="display:flex;align-items:stretch;border:1px solid var(--ink);margin-bottom:20px">
           <button
             @click="mode = 'bralToBeer'"
+            :aria-pressed="mode === 'bralToBeer'"
             :style="{ flex:1, padding:'12px', border:'none', background: mode==='bralToBeer' ? 'var(--ink)' : 'transparent', color: mode==='bralToBeer' ? 'var(--paper)' : 'var(--ink)', cursor:'pointer', fontSize:'10px', letterSpacing:'0.2em', textTransform:'uppercase' }"
           >Bral ▸ Beer</button>
           <button
             @click="mode = 'beerToBral'"
+            :aria-pressed="mode === 'beerToBral'"
             :style="{ flex:1, padding:'12px', border:'none', borderLeft:'1px solid var(--ink)', background: mode==='beerToBral' ? 'var(--ink)' : 'transparent', color: mode==='beerToBral' ? 'var(--paper)' : 'var(--ink)', cursor:'pointer', fontSize:'10px', letterSpacing:'0.2em', textTransform:'uppercase' }"
           >Beer ▸ Bral</button>
         </div>
 
         <div style="border:1px solid var(--ink);padding:18px 20px;background:var(--paper-2);margin-bottom:14px">
-          <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.55">You deposit</div>
+          <label for="exchange-amount" style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.78;display:block">You deposit</label>
           <div style="display:flex;align-items:baseline;gap:12px">
             <input
+              id="exchange-amount"
               type="number"
               :value="amount"
               @input="onAmountInput"
               min="0"
               step="1"
-              style="border:none;background:transparent;font-size:56px;width:100%;font-family:'Instrument Serif',serif;outline:none;padding:0;color:var(--ink);min-width:0"
+              :aria-label="`Amount in ${from}`"
+              style="border:none;background:transparent;font-size:56px;width:100%;font-family:'Instrument Serif',serif;padding:0;color:var(--ink);min-width:0"
             />
             <div class="upper" style="font-size:14px;letter-spacing:0.2em">{{ from }}</div>
           </div>
         </div>
 
-        <div style="text-align:center;font-size:20px;opacity:0.5;margin:4px 0">↓</div>
+        <div aria-hidden="true" style="text-align:center;font-size:20px;opacity:0.78;margin:4px 0">↓</div>
 
-        <div style="border:1px solid var(--ink);padding:18px 20px;background:var(--ink);color:var(--paper)">
-          <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.55">You receive</div>
+        <div
+          role="status"
+          aria-live="polite"
+          :aria-label="`${fmt(result)} ${to}`"
+          style="border:1px solid var(--ink);padding:18px 20px;background:var(--ink);color:var(--paper)"
+        >
+          <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.78">You receive</div>
           <div style="display:flex;align-items:baseline;gap:12px">
             <div style="font-size:56px;font-family:'Instrument Serif',serif;width:100%;line-height:1.05">{{ fmt(result) }}</div>
             <div class="upper" style="font-size:14px;letter-spacing:0.2em">{{ to }}</div>
           </div>
-          <div class="mono" style="font-size:10px;margin-top:8px;opacity:0.6;letter-spacing:0.08em">
+          <div class="mono" style="font-size:10px;margin-top:8px;opacity:0.78;letter-spacing:0.08em">
             ≡ {{ fmt(result * 330) }} mL · {{ (result * 0.33).toFixed(2) }} L
           </div>
         </div>
@@ -63,7 +72,7 @@
 
       <!-- Chart -->
       <div class="exchange-chart" style="padding:36px 40px;position:relative">
-        <div style="font-size:10px;letter-spacing:0.3em;text-transform:uppercase;opacity:0.6;margin-bottom:8px">Historical Rate · BRAL / BEER</div>
+        <div style="font-size:10px;letter-spacing:0.3em;text-transform:uppercase;opacity:0.78;margin-bottom:8px">Historical Rate · BRAL / BEER</div>
         <div class="serif" style="font-size:34px;line-height:1.1;margin-bottom:28px">Stability, <em>by design</em>.</div>
 
         <svg viewBox="0 0 400 180" width="100%" height="200" style="border:1px solid var(--ink);background:var(--paper-2)">
@@ -87,7 +96,7 @@
 
         <div style="display:grid;grid-template-columns:repeat(3,1fr);margin-top:22px;border:1px solid var(--ink)">
           <div v-for="(stat, i) in chartStats" :key="stat.label" :style="{ padding:'12px 14px', borderLeft: i===0 ? 'none' : '1px solid var(--ink)' }">
-            <div style="font-size:9px;letter-spacing:0.15em;text-transform:uppercase;opacity:0.55">{{ stat.label }}</div>
+            <div style="font-size:9px;letter-spacing:0.15em;text-transform:uppercase;opacity:0.78">{{ stat.label }}</div>
             <div class="serif" style="font-size:22px;line-height:1.1;margin-top:2px">{{ stat.value }}</div>
           </div>
         </div>
