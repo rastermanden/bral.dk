@@ -10,6 +10,7 @@
       <a href="#rate">Exchange</a>
       <a href="#mint">Denominations</a>
       <a href="#reserves">Reserves</a>
+      <a href="#address">Address</a>
       <a href="#schedule">Schedule</a>
       <a href="#shop">Shop</a>
       <a href="#governors">Governors</a>
@@ -39,6 +40,7 @@
         <a href="#rate"      @click="menuOpen = false">Exchange</a>
         <a href="#mint"      @click="menuOpen = false">Denominations</a>
         <a href="#reserves"  @click="menuOpen = false">Reserves</a>
+        <a href="#address"   @click="menuOpen = false">Address</a>
         <a href="#schedule"  @click="menuOpen = false">Schedule</a>
         <a href="#shop"      @click="menuOpen = false">Shop</a>
         <a href="#governors" @click="menuOpen = false">Governors</a>
