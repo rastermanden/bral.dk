@@ -1,0 +1,58 @@
+{
+  "charter": {
+    "preamble": "The Board of Governors is the standing deliberative organ of the Banco·Bral. It is convened quarterly at the Loshult mint-house, and on such extraordinary occasions as the Chair, in writing, deems necessary. Its proceedings are minuted in ink, countersigned in aluminum, and deposited in the vault of record.",
+    "mandate": "The Board is charged with safeguarding the convertibility of the Bral, approving the Mint Schedule, ratifying commemorative strikes, and exercising oversight of the Six. It does not transact; it does not trade; it does not speak to the press.",
+    "clauses": [
+      { "num": "I",   "text": "The Board shall comprise no fewer than five and no more than seven Governors, of whom three shall hold seats ex officio from the Mint Roster." },
+      { "num": "II",  "text": "A quorum shall consist of four Governors present in person at Loshult, or three present and one by certified wire." },
+      { "num": "III", "text": "All motions pass by simple majority, save those concerning convertibility, which require unanimity of seated Governors." },
+      { "num": "IV",  "text": "The Chair shall preside, break ties, and affix the seal. No Governor save the Chair may address the Board without recognition." },
+      { "num": "V",   "text": "Minutes shall be posted within fourteen days. Dissents shall be recorded by name, in full, without abbreviation." }
+    ],
+    "cadence": "Convenes quarterly · Spring · Summer · Harvest · Mid-Winter",
+    "quorum": "Four of Five",
+    "seat_of_record": "Loshult · Småland"
+  },
+  "roster": [
+    {
+      "id": "G-I",
+      "name": "Mikkel Linnet",
+      "title": "Chair of the Board of Governors",
+      "function": "Presides; affixes the seal; breaks ties; speaks for the Board.",
+      "seat_type": "minter",
+      "minter_id": "MKL"
+    },
+    {
+      "id": "G-II",
+      "name": "Simon Kjær Poulsen",
+      "title": "Governor for the Reserves",
+      "function": "Vouches for the ton; answers for the vault.",
+      "seat_type": "minter",
+      "minter_id": "SKP"
+    },
+    {
+      "id": "G-III",
+      "name": "Uffe Schjødt",
+      "title": "Governor for Audit",
+      "function": "Reconciles the ledger against the cans.",
+      "seat_type": "minter",
+      "minter_id": "UFS"
+    },
+    {
+      "id": "G-IV",
+      "name": "Ingeborg Hald",
+      "title": "Governor for Foundry Relations",
+      "function": "Liaises with smelters; certifies alloy provenance.",
+      "seat_type": "external",
+      "minter_id": null
+    },
+    {
+      "id": "G-V",
+      "name": "H. P. Wernersson",
+      "title": "External Observer",
+      "function": "Attends without vote; files the annual Remark.",
+      "seat_type": "external",
+      "minter_id": null
+    }
+  ]
+}
