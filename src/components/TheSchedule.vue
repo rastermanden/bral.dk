@@ -25,7 +25,7 @@
         <span class="mono sched-date" style="font-size:12px">{{ s.date }}</span>
         <span class="serif sched-event" style="font-size:20px;letter-spacing:-0.01em;line-height:1.15">{{ s.event }}</span>
         <span class="mono sched-delta" style="color:var(--accent)">{{ s.reserve }}</span>
-        <span class="sched-notes" style="opacity:0.75">{{ s.notes }}</span>
+        <span class="sched-notes" style="opacity:0.9">{{ s.notes }}</span>
         <span
           class="mono upper sched-status"
           :style="{ fontSize:'10px', letterSpacing:'0.2em', textAlign:'right', color: s.status === 'upcoming' ? 'var(--accent)' : 'inherit' }"

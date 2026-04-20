@@ -14,7 +14,7 @@
       >
         <div style="display:flex;justify-content:space-between;align-items:baseline">
           <div class="serif" style="font-size:48px;line-height:1;color:var(--accent)">{{ a.num }}</div>
-          <div class="mono upper" style="font-size:10px;opacity:0.55">Article</div>
+          <div class="mono upper" style="font-size:10px;opacity:0.78">Article</div>
         </div>
         <h3 class="serif" style="font-size:28px;margin:12px 0 10px;font-weight:400">{{ a.title }}</h3>
         <p style="font-size:12.5px;line-height:1.7;margin:0;max-width:420px">{{ a.body }}</p>

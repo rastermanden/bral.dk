@@ -9,7 +9,7 @@
     <div class="nl-body">
 
       <div class="nl-info">
-        <div class="mono upper" style="font-size:10px;letter-spacing:0.2em;opacity:0.6;margin-bottom:20px">Dispatch Archive</div>
+        <div class="mono upper" style="font-size:10px;letter-spacing:0.2em;opacity:0.78;margin-bottom:20px">Dispatch Archive</div>
         <div
           v-for="issue in issues"
           :key="issue.id"
@@ -17,38 +17,40 @@
         >
           <div class="mono" style="font-size:10px;color:var(--accent);margin-bottom:4px">{{ issue.date }}</div>
           <div class="serif nl-issue-title">{{ issue.title }}</div>
-          <div style="font-size:11.5px;line-height:1.6;opacity:0.65">{{ issue.summary }}</div>
+          <div style="font-size:11.5px;line-height:1.6;opacity:0.85">{{ issue.summary }}</div>
         </div>
       </div>
 
       <div class="nl-form-wrap">
         <div class="nl-form-box">
-          <div class="mono upper" style="font-size:10px;letter-spacing:0.2em;opacity:0.6;margin-bottom:20px">Subscribe to the Communiqué</div>
+          <div class="mono upper" style="font-size:10px;letter-spacing:0.2em;opacity:0.78;margin-bottom:20px">Subscribe to the Communiqué</div>
 
           <template v-if="!subscribed">
-            <p style="font-size:12px;line-height:1.75;margin:0 0 24px;opacity:0.75">
+            <p style="font-size:12px;line-height:1.75;margin:0 0 24px;opacity:0.9">
               The Communiqué is issued at the Governor's discretion. Frequency: irregular.
               Content: authoritative. Unsubscribe at any time by written petition to the Board.
             </p>
-            <form @submit.prevent="submit" class="nl-form">
+            <form @submit.prevent="submit" class="nl-form" novalidate>
               <div class="nl-field">
-                <label class="mono upper" style="font-size:10px;letter-spacing:0.15em;opacity:0.6;display:block;margin-bottom:8px">
+                <label for="nl-email" class="mono upper" style="font-size:10px;letter-spacing:0.15em;opacity:0.78;display:block;margin-bottom:8px">
                   Email Address
                 </label>
                 <input
+                  id="nl-email"
                   v-model="email"
                   type="email"
                   required
+                  autocomplete="email"
                   placeholder="your@address.org"
                   class="nl-input mono"
                   :disabled="submitting"
                 />
               </div>
               <div class="nl-field">
-                <label class="mono upper" style="font-size:10px;letter-spacing:0.15em;opacity:0.6;display:block;margin-bottom:8px">
+                <label for="nl-cadence" class="mono upper" style="font-size:10px;letter-spacing:0.15em;opacity:0.78;display:block;margin-bottom:8px">
                   Dispatch Frequency
                 </label>
-                <select v-model="cadence" class="nl-select mono" :disabled="submitting">
+                <select id="nl-cadence" v-model="cadence" class="nl-select mono" :disabled="submitting">
                   <option value="immediate">Immediate — all announcements</option>
                   <option value="digest">Weekly digest</option>
                   <option value="quarterly">Quarterly report only</option>
@@ -58,18 +60,18 @@
                 {{ submitting ? 'Processing…' : 'Submit Subscription Request' }} →
               </button>
             </form>
-            <div style="font-size:10px;opacity:0.35;margin-top:16px;line-height:1.65">
+            <div style="font-size:10px;opacity:0.7;margin-top:16px;line-height:1.65">
               By subscribing you acknowledge the Banco·Bral privacy charter (Ref. BB·P·002)
               and consent to receive official monetary correspondence.
             </div>
           </template>
 
-          <div v-else class="nl-confirmed">
+          <div v-else class="nl-confirmed" role="status" aria-live="polite">
             <div class="stamp" style="margin-bottom:24px;display:inline-block">Approved</div>
             <div class="serif" style="font-size:clamp(24px,2.5vw,36px);line-height:1.05;letter-spacing:-0.02em;margin-bottom:16px">
               Subscription Registered
             </div>
-            <div style="font-size:12px;line-height:1.75;opacity:0.75">
+            <div style="font-size:12px;line-height:1.75;opacity:0.9">
               Your request has been logged and forwarded to the Governor's secretariat.
               Expect your first Communiqué at the next scheduled dispatch.
             </div>
@@ -152,7 +154,7 @@ function submit() {
   width: 100%;
   appearance: none;
 }
-.nl-input::placeholder { opacity: 0.35; }
+.nl-input::placeholder { opacity: 0.6; }
 .nl-input:focus,
 .nl-select:focus { border-color: var(--accent); }
 

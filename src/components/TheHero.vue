@@ -6,7 +6,7 @@
       <div class="rule-r hero-left" style="position:relative">
         <div style="display:flex;gap:14px;align-items:baseline;margin-bottom:26px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase">
           <span style="color:var(--accent)">◆ Nº 001</span>
-          <span style="opacity:0.55">— A Communiqué From The Treasury —</span>
+          <span style="opacity:0.78">— A Communiqué From The Treasury —</span>
         </div>
 
         <h1 class="serif" style="font-size:clamp(48px,9vw,156px);line-height:0.88;margin:0;letter-spacing:-0.035em;font-weight:400">
@@ -30,8 +30,8 @@
         <!-- stamp + signature -->
         <div class="hero-stamp" style="text-align:right">
           <div class="stamp">Ratified · MMXXIV</div>
-          <div class="serif" style="margin-top:14px;font-style:italic;font-size:22px;opacity:0.7">M. Linnet</div>
-          <div class="mono upper" style="font-size:9px;opacity:0.55;margin-top:2px">Governor, Banco·Bral</div>
+          <div class="serif" style="margin-top:14px;font-style:italic;font-size:22px;opacity:0.85">M. Linnet</div>
+          <div class="mono upper" style="font-size:9px;opacity:0.78;margin-top:2px">Governor, Banco·Bral</div>
         </div>
 
         <!-- stats strip -->
@@ -42,7 +42,7 @@
             class="stats-item"
             :style="{ borderLeft: i === 0 ? 'none' : '1px solid var(--ink)' }"
           >
-            <div style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.55">{{ stat.key }}</div>
+            <div style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.78">{{ stat.key }}</div>
             <div class="serif" style="font-size:26px;line-height:1.1;margin-top:4px">
               {{ stat.value }}
             </div>
@@ -72,7 +72,7 @@
           <div :style="cornerDotStyle(c)" />
         </div>
 
-        <div style="position:absolute;bottom:18px;left:0;right:0;text-align:center;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;opacity:0.55">
+        <div style="position:absolute;bottom:18px;left:0;right:0;text-align:center;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;opacity:0.78">
           Fig. 001 — Ten Bral, obverse
         </div>
       </div>

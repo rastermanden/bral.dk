@@ -23,13 +23,13 @@
         </div>
 
         <div style="display:flex;justify-content:space-between;align-items:baseline">
-          <div class="mono upper" style="font-size:9px;letter-spacing:0.2em;opacity:0.55">{{ item.sku }}</div>
+          <div class="mono upper" style="font-size:9px;letter-spacing:0.2em;opacity:0.78">{{ item.sku }}</div>
           <div class="serif" style="font-size:32px;letter-spacing:-0.01em;color:var(--accent)">
-            {{ item.price }}<span style="font-size:12px;opacity:0.6;margin-left:4px">bral</span>
+            {{ item.price }}<span style="font-size:12px;opacity:0.78;margin-left:4px">bral</span>
           </div>
         </div>
         <div class="serif" style="font-size:24px;line-height:1.15;margin-top:6px">{{ item.name }}</div>
-        <div style="font-size:11.5px;opacity:0.7;margin-top:6px;line-height:1.55">{{ item.desc }}</div>
+        <div style="font-size:11.5px;opacity:0.88;margin-top:6px;line-height:1.55">{{ item.desc }}</div>
         <div style="margin-top:16px;display:flex;gap:10px">
           <button class="btn" style="padding:8px 12px;font-size:10px">Add to Cart</button>
           <button class="btn btn-ghost" style="padding:8px 12px;font-size:10px">Details</button>

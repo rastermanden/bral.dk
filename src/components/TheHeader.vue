@@ -83,7 +83,7 @@ onUnmounted(() => document.removeEventListener('keydown', onKeydown))
   text-decoration: none;
   color: inherit;
 }
-.header-tagline { opacity: 0.55; white-space: nowrap; }
+.header-tagline { opacity: 0.78; white-space: nowrap; }
 .header-nav {
   margin-left: auto;
   display: flex;
