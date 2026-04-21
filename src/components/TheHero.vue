@@ -71,7 +71,6 @@
             <div class="coin-face back">
               <img :src="coinBack" alt="One Bral, reverse — Loshult 2025" />
             </div>
-            <div class="coin-rim" aria-hidden="true"></div>
           </div>
         </div>
 
