@@ -71,7 +71,6 @@
             <div class="coin-face back">
               <img :src="coinBack" alt="One Bral, reverse — Loshult 2025" />
             </div>
-            <div class="coin-rim" aria-hidden="true"></div>
           </div>
         </div>
 
@@ -101,8 +100,8 @@ const heroStats = [
   { key: 'MINTERS',        value: `${stats.minters} licensed`,   sub: `since ${stats.establishedYear}` },
 ]
 
-const coinFront = import.meta.env.BASE_URL + 'img/coin-front.jpg'
-const coinBack  = import.meta.env.BASE_URL + 'img/coin-back.jpg'
+const coinFront = import.meta.env.BASE_URL + 'img/coin-front.png'
+const coinBack  = import.meta.env.BASE_URL + 'img/coin-back.png'
 
 function cornerStyle(c) {
   return {
