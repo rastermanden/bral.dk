@@ -1,0 +1,29 @@
+[
+  {
+    "year": 2024,
+    "roman": "MMXXIV",
+    "status": "struck",
+    "title": "Inaugural Strike",
+    "note": "First aluminium poured in the Loshult garden. Small mintage, rough edges, much learning. Planchets cast from Carlsberg, Tuborg, and the occasional contraband Pripps.",
+    "minted": "Jul–Nov 2024",
+    "pieces": 118
+  },
+  {
+    "year": 2025,
+    "roman": "MMXXV",
+    "status": "struck",
+    "title": "The Standard Year",
+    "note": "The One Bral reaches its canonical form. Portraits of obverse and reverse, photographed by M.B. Jensen, become the official reference specimen.",
+    "minted": "Mar–Dec 2025",
+    "pieces": 467
+  },
+  {
+    "year": 2026,
+    "roman": "MMXXVI",
+    "status": "scheduled",
+    "title": "The October Strike",
+    "note": "Larger denominations (Half Keg, Full Keg) require a longer cool and heavier planchets. A single pour is scheduled for autumn, weather permitting.",
+    "minted": "October 2026",
+    "pieces": null
+  }
+]
