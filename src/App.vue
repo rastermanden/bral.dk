@@ -6,6 +6,7 @@
   <TheManifesto />
   <TheExchange />
   <TheDenominations />
+  <TheVintages />
   <TheReserves />
   <TheAddress />
   <TheSchedule />
@@ -26,6 +27,7 @@ import TheHero         from './components/TheHero.vue'
 import TheManifesto    from './components/TheManifesto.vue'
 import TheExchange     from './components/TheExchange.vue'
 import TheDenominations from './components/TheDenominations.vue'
+import TheVintages     from './components/TheVintages.vue'
 import TheReserves     from './components/TheReserves.vue'
 import TheAddress      from './components/TheAddress.vue'
 import TheSchedule     from './components/TheSchedule.vue'
