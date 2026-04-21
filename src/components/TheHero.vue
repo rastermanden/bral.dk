@@ -63,8 +63,16 @@
           <rect width="100%" height="100%" fill="url(#cross)" />
         </svg>
 
-        <div class="coin-spin coin-container" style="filter:drop-shadow(0 20px 30px rgba(0,0,0,0.35))">
-          <img :src="coinSrc" alt="Ten Bral coin" style="width:100%;height:100%;border-radius:50%;object-fit:cover;display:block" />
+        <div class="coin-flip-scene coin-container" style="filter:drop-shadow(0 20px 30px rgba(0,0,0,0.35))">
+          <div class="coin-flip">
+            <div class="coin-face front">
+              <img :src="coinFront" alt="One Bral, obverse — Naturklubben emblem" />
+            </div>
+            <div class="coin-face back">
+              <img :src="coinBack" alt="One Bral, reverse — Loshult 2025" />
+            </div>
+            <div class="coin-rim" aria-hidden="true"></div>
+          </div>
         </div>
 
         <!-- corner registration marks -->
@@ -73,7 +81,7 @@
         </div>
 
         <div style="position:absolute;bottom:18px;left:0;right:0;text-align:center;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;opacity:0.78">
-          Fig. 001 — Ten Bral, obverse
+          Fig. 001 — One Bral · Loshult 2025
         </div>
       </div>
 
@@ -93,7 +101,8 @@ const heroStats = [
   { key: 'MINTERS',        value: `${stats.minters} licensed`,   sub: `since ${stats.establishedYear}` },
 ]
 
-const coinSrc = import.meta.env.BASE_URL + 'img/coin.jpg'
+const coinFront = import.meta.env.BASE_URL + 'img/coin-front.jpg'
+const coinBack  = import.meta.env.BASE_URL + 'img/coin-back.jpg'
 
 function cornerStyle(c) {
   return {

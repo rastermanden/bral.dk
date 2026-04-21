@@ -152,6 +152,65 @@ input[type="range"]:focus-visible { outline-offset: 4px; }
   will-change: transform;
 }
 
+/* 3D coin flip — rotates around vertical axis, showing front + back faces */
+@keyframes coinflip {
+  from { transform: rotateY(0deg); }
+  to   { transform: rotateY(360deg); }
+}
+.coin-flip-scene {
+  perspective: 1400px;
+  transform-style: preserve-3d;
+}
+.coin-flip {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: coinflip 9s linear infinite;
+  will-change: transform;
+}
+.coin-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow:
+    inset 0 0 0 1px rgba(26, 23, 20, 0.25),
+    inset 0 0 28px rgba(26, 23, 20, 0.18);
+}
+.coin-face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 50%;
+}
+.coin-face.back { transform: rotateY(180deg); }
+/* Thin rim that hides the seam where the two faces meet */
+.coin-rim {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  background:
+    conic-gradient(
+      from 0deg,
+      rgba(120, 115, 106, 0.55) 0deg,
+      rgba(210, 205, 195, 0.25) 90deg,
+      rgba(120, 115, 106, 0.55) 180deg,
+      rgba(210, 205, 195, 0.25) 270deg,
+      rgba(120, 115, 106, 0.55) 360deg
+    );
+  -webkit-mask: radial-gradient(circle at 50% 50%, transparent calc(50% - 4px), #000 calc(50% - 4px), #000 50%, transparent 50%);
+          mask: radial-gradient(circle at 50% 50%, transparent calc(50% - 4px), #000 calc(50% - 4px), #000 50%, transparent 50%);
+  transform: translateZ(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .coin-flip { animation: none; }
+}
+
 /* Marquee */
 @keyframes marquee {
   from { transform: translateX(0); }
