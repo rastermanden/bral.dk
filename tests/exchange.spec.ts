@@ -191,6 +191,98 @@ test.describe('exchange section UI', () => {
       })
     }
   })
+
+  test('exchange chart: readable non-overlapping labels and aspect ratio at 769 and 900 px', async ({ page }) => {
+    const measureAt = async (width: number) => {
+      await page.setViewportSize({ width, height: 900 })
+      await page.locator('#rate').scrollIntoViewIfNeeded()
+      return page.evaluate(() => {
+        const svg = document.querySelector('#rate .exchange-chart-svg')!
+        const svgRect = svg.getBoundingClientRect()
+        const scale = svgRect.width / 400
+
+        const visibleBoxes = (selector: string) =>
+          Array.from(svg.querySelectorAll(selector))
+            .filter(el => getComputedStyle(el).display !== 'none')
+            .map(el => {
+              const r = el.getBoundingClientRect()
+              const cssFontPx = parseFloat(getComputedStyle(el).fontSize)
+              return {
+                text: el.textContent?.trim() ?? '',
+                period: el.getAttribute('data-period') ?? '',
+                left: r.left,
+                right: r.right,
+                top: r.top,
+                bottom: r.bottom,
+                width: r.width,
+                height: r.height,
+                effectiveFontPx: cssFontPx * scale,
+              }
+            })
+            .filter(b => b.width > 0 && b.height > 0)
+
+        return {
+          svg: { left: svgRect.left, right: svgRect.right, width: svgRect.width, height: svgRect.height },
+          periods: visibleBoxes('.chart-period'),
+          notes: visibleBoxes('.chart-note'),
+        }
+      })
+    }
+
+    const mobile = await measureAt(390)
+    const mobileEffectiveFont = Math.min(...mobile.periods.map(p => p.effectiveFontPx))
+
+    for (const width of [769, 900]) {
+      const m = await measureAt(width)
+
+      // SVG preserves its 400/180 aspect ratio without fixed-height letterboxing
+      expect(Math.abs(m.svg.width / m.svg.height - 400 / 180), `aspect ratio at ${width}px`).toBeLessThan(0.06)
+
+      // Effective label font size is at least as large as at 390 px
+      const minEffectiveFont = Math.min(...m.periods.map(p => p.effectiveFontPx))
+      expect(minEffectiveFont, `effective font size at ${width}px`).toBeGreaterThanOrEqual(mobileEffectiveFont - 0.05)
+
+      // No horizontal clipping
+      for (const label of [...m.periods, ...m.notes]) {
+        expect(label.left, `${label.text} clipped left at ${width}px`).toBeGreaterThanOrEqual(m.svg.left - 1)
+        expect(label.right, `${label.text} clipped right at ${width}px`).toBeLessThanOrEqual(m.svg.right + 1)
+      }
+
+      // No overlapping period labels
+      const sortedPeriods = [...m.periods].sort((a, b) => a.left - b.left)
+      for (let i = 1; i < sortedPeriods.length; i++) {
+        expect(sortedPeriods[i - 1].right, `${sortedPeriods[i - 1].text} overlaps ${sortedPeriods[i].text} at ${width}px`).toBeLessThan(sortedPeriods[i].left)
+      }
+
+      // No overlapping notes with each other or period labels
+      const overlap = (a: typeof m.notes[number], b: typeof m.notes[number]) =>
+        a.right > b.left && a.left < b.right && a.bottom > b.top && a.top < b.bottom
+
+      for (let i = 0; i < m.notes.length; i++) {
+        for (let j = i + 1; j < m.notes.length; j++) {
+          expect(overlap(m.notes[i], m.notes[j]), `notes overlap at ${width}px`).toBe(false)
+        }
+        for (const p of m.periods) {
+          expect(overlap(m.notes[i], p), `note overlaps period at ${width}px`).toBe(false)
+        }
+      }
+    }
+  })
+
+  test('exchange chart: exposes accessible name and 0.97 / 0.98 rates in the accessibility tree', async ({ page }) => {
+    await expect(page.locator('#rate .exchange-chart-svg')).toHaveAttribute('aria-hidden', 'true')
+
+    const table = page.locator('#rate').getByRole('table', { name: /Historical exchange rate/i })
+    await expect(table).toBeAttached()
+
+    const a11yTree = await page.locator('#rate .exchange-chart-frame').ariaSnapshot()
+    expect(a11yTree).toMatch(/table "Historical exchange rate/i)
+    expect(a11yTree).toContain('0.98')
+    expect(a11yTree).toContain('0.97')
+    expect(a11yTree).toContain('Q3 25')
+    expect(a11yTree).toContain('Q4 26')
+    expect(a11yTree).toContain('can shortage')
+  })
 })
 
 test('exchange stat: reacts to mocked rates.json instead of hard-coding 2 / 24m', async ({ page }) => {

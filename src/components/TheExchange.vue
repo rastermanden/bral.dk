@@ -75,40 +75,62 @@
         <div style="font-size:10px;letter-spacing:0.3em;text-transform:uppercase;opacity:0.78;margin-bottom:8px">Historical Rate · BRAL / BEER</div>
         <div class="serif" style="font-size:34px;line-height:1.1;margin-bottom:28px">Stability, <em>by design</em>.</div>
 
-        <svg class="exchange-chart-svg" viewBox="0 0 400 180" width="100%" height="200" style="border:1px solid var(--ink);background:var(--paper-2)">
-          <g v-for="r in gridLines" :key="r">
-            <line x1="40" x2="400" :y1="yPos(r)" :y2="yPos(r)" stroke="var(--ink)" stroke-width="0.3" :stroke-dasharray="r === 1 ? '0' : '2 2'" :opacity="r === 1 ? 0.9 : 0.3" />
-            <text x="4" :y="yPos(r) + 3" font-size="8" font-family="JetBrains Mono" fill="var(--ink)" opacity="0.6">{{ r.toFixed(2) }}</text>
-          </g>
+        <div class="exchange-chart-frame">
+          <svg class="exchange-chart-svg" aria-hidden="true" focusable="false" viewBox="0 0 400 180">
+            <g v-for="r in gridLines" :key="r">
+              <line x1="40" x2="400" :y1="yPos(r)" :y2="yPos(r)" stroke="var(--ink)" stroke-width="0.3" :stroke-dasharray="r === 1 ? '0' : '2 2'" :opacity="r === 1 ? 0.9 : 0.3" />
+              <text x="4" :y="yPos(r) + 3" font-size="8" font-family="JetBrains Mono" fill="var(--ink)" opacity="0.6">{{ r.toFixed(2) }}</text>
+            </g>
 
-          <path :d="linePath" fill="none" stroke="var(--accent)" stroke-width="1.6" />
+            <path :d="linePath" fill="none" stroke="var(--accent)" stroke-width="1.6" />
 
-          <g v-for="(pt, i) in chartPoints" :key="pt.period">
-            <circle class="chart-dot" :data-period="pt.period" :cx="pt.x" :cy="pt.y" r="2.5" fill="var(--accent)" />
-            <text
-              class="chart-period"
-              :class="{ 'chart-period--secondary': !pt.showOnMobile }"
-              :data-period="pt.period"
-              :x="pt.x"
-              y="174"
-              font-family="JetBrains Mono"
-              text-anchor="middle"
-              fill="var(--ink)"
-              opacity="0.7"
-            >{{ pt.period }}</text>
-            <text
-              v-if="pt.note"
-              class="chart-note"
-              :data-period="pt.period"
-              :x="pt.noteX"
-              :y="pt.noteY"
-              font-family="JetBrains Mono"
-              :text-anchor="pt.noteAnchor"
-              fill="var(--ink)"
-              opacity="0.85"
-            >{{ pt.note }}</text>
-          </g>
-        </svg>
+            <g v-for="(pt, i) in chartPoints" :key="pt.period">
+              <circle class="chart-dot" :data-period="pt.period" :cx="pt.x" :cy="pt.y" r="2.5" fill="var(--accent)" />
+              <text
+                class="chart-period"
+                :class="{ 'chart-period--secondary': !pt.showOnMobile }"
+                :data-period="pt.period"
+                :x="pt.x"
+                y="174"
+                font-family="JetBrains Mono"
+                text-anchor="middle"
+                fill="var(--ink)"
+                opacity="0.7"
+              >{{ pt.period }}</text>
+              <text
+                v-if="pt.note"
+                class="chart-note"
+                :data-period="pt.period"
+                :x="pt.noteX"
+                :y="pt.noteY"
+                font-family="JetBrains Mono"
+                :text-anchor="pt.noteAnchor"
+                fill="var(--ink)"
+                opacity="0.85"
+              >{{ pt.note }}</text>
+            </g>
+          </svg>
+
+          <div class="sr-only">
+            <table>
+              <caption>Historical exchange rate, BRAL per BEER ({{ rates[0]?.period }}–{{ rates[rates.length - 1]?.period }})</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Period</th>
+                  <th scope="col">Rate (BRAL per BEER)</th>
+                  <th scope="col">Note</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="r in rates" :key="r.period">
+                  <th scope="row">{{ r.period }}</th>
+                  <td>{{ r.rate.toFixed(2) }}</td>
+                  <td>{{ r.note || 'Peg held' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
         <div class="mono exchange-footnote" style="font-size:10px;margin-top:12px;opacity:0.7">
           <div>† The Q3 25 deviation followed a regional aluminum-can shortage (the "Dry August"). Peg restored within 11 days by an emergency pull-tab strike.</div>
@@ -218,8 +240,42 @@ const chartStats = computed(() => [
   grid-template-columns: 1.1fr 1fr;
   gap: 0;
 }
+.exchange-chart-frame {
+  position: relative;
+  container-type: inline-size;
+  container-name: exchange-chart;
+}
+.exchange-chart-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 400 / 180;
+  border: 1px solid var(--ink);
+  background: var(--paper-2);
+}
 .chart-period { font-size: 7px; }
 .chart-note { font-size: 7px; }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@container exchange-chart (max-width: 440px) {
+  .chart-period--secondary { display: none; }
+  .chart-period { font-size: 8.5px; }
+  .chart-note { font-size: 8px; }
+}
+@container exchange-chart (max-width: 305px) {
+  .chart-period { font-size: 9.5px; }
+  .chart-note { font-size: 9px; }
+}
 
 @media (max-width: 1024px) {
   .exchange-section { padding: 60px 32px; }
@@ -236,8 +292,5 @@ const chartStats = computed(() => [
   .exchange-section { padding: 48px 20px; }
   .exchange-calc { padding: 24px 20px !important; }
   .exchange-chart { padding: 24px 20px !important; }
-  .chart-period--secondary { display: none; }
-  .chart-period { font-size: 8.5px; }
-  .chart-note { font-size: 8px; }
 }
 </style>
