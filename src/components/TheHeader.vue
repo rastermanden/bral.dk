@@ -91,8 +91,11 @@ onUnmounted(() => document.removeEventListener('keydown', onKeydown))
 .header-nav {
   margin-left: auto;
   display: flex;
-  gap: 22px;
-  flex-wrap: nowrap;
+  gap: 16px;
+  row-gap: 6px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  min-width: 0;
 }
 .header-nav a { white-space: nowrap; }
 
@@ -162,6 +165,9 @@ onUnmounted(() => document.removeEventListener('keydown', onKeydown))
 .menu-enter-active, .menu-leave-active { transition: opacity 0.2s ease, transform 0.2s ease; }
 .menu-enter-from, .menu-leave-to { opacity: 0; transform: translateY(-8px); }
 
+@media (max-width: 1440px) {
+  .header-tagline { display: none; }
+}
 @media (max-width: 1024px) {
   .header-nav { gap: 14px; }
 }

@@ -32,7 +32,14 @@ test('header: nav hidden on mobile, visible on tablet+', async ({ page }) => {
 })
 
 test('header: Redeem button is always visible', async ({ page }) => {
-  await expect(page.locator('.header-cta')).toBeVisible()
+  const viewport = page.viewportSize()!
+  if (viewport.width <= 640) {
+    await expect(page.locator('.hamburger')).toBeVisible()
+    await page.locator('.hamburger').click()
+    await expect(page.locator('.mobile-menu-cta')).toBeVisible()
+  } else {
+    await expect(page.locator('.header-cta')).toBeVisible()
+  }
 })
 
 // ── Hero ─────────────────────────────────────────────────────────────────────
