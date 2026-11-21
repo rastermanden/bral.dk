@@ -130,6 +130,7 @@
 import { ref, computed } from 'vue'
 import SectionHead from './SectionHead.vue'
 import rates from '../data/rates.json'
+import { DEVIATION_WINDOW_QUARTERS, formatDeviationStat } from '../utils/exchangeStats.js'
 
 const mode   = ref('bralToBeer')
 const amount = ref(12)
@@ -199,13 +200,13 @@ const linePath = computed(() =>
   chartPoints.value.map((pt, i) => `${i === 0 ? 'M' : 'L'} ${pt.x} ${pt.y}`).join(' ')
 )
 
-const deviationEvents24m = computed(() =>
-  rates.slice(-8).filter(r => Boolean(r.note)).length
+const deviationStatValue = computed(() =>
+  formatDeviationStat(rates, DEVIATION_WINDOW_QUARTERS)
 )
 
 const chartStats = computed(() => [
   { label: '30D VOLATILITY',     value: '0.00%' },
-  { label: 'DEVIATION EVENTS',   value: `${deviationEvents24m.value} / 24m` },
+  { label: 'DEVIATION EVENTS',   value: deviationStatValue.value },
   { label: 'REDEMPTION SUCCESS', value: '100%' },
 ])
 </script>

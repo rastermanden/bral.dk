@@ -10,9 +10,9 @@ export default defineConfig({
     browserName: 'chromium',
   },
   webServer: {
-    command: 'npx vite --port 5180',
+    command: 'npx vite --port 5180 --strictPort',
     url: 'http://localhost:5180/',
-    reuseExistingServer: true,
+    reuseExistingServer: !process.env.CI,
     timeout: 60_000,
   },
   projects: [
