@@ -12,12 +12,13 @@ export default defineConfig({
   webServer: {
     command: 'npx vite --port 5180 --strictPort',
     url: 'http://localhost:5180/',
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: false,
     timeout: 60_000,
   },
   projects: [
     {
       name: 'mobile',
+      testIgnore: /\.unit\.spec\.ts$/,
       use: {
         viewport: { width: 390, height: 844 },
         deviceScaleFactor: 2,
@@ -26,6 +27,7 @@ export default defineConfig({
     },
     {
       name: 'tablet',
+      testIgnore: /\.unit\.spec\.ts$/,
       use: {
         viewport: { width: 768, height: 1024 },
         deviceScaleFactor: 1,

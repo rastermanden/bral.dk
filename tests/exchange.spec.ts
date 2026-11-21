@@ -1,12 +1,6 @@
 import { test, expect } from '@playwright/test'
 import fs from 'node:fs'
 import path from 'node:path'
-import {
-  DEVIATION_WINDOW_QUARTERS,
-  DEVIATION_WINDOW_MONTHS,
-  countDeviationEvents,
-  formatDeviationStat,
-} from '../src/utils/exchangeStats.js'
 
 interface RatePoint {
   period: string
@@ -17,53 +11,6 @@ interface RatePoint {
 const rates: RatePoint[] = JSON.parse(
   fs.readFileSync(path.resolve('src/data/rates.json'), 'utf8')
 )
-
-test.describe('countDeviationEvents unit tests', () => {
-  test('uses a single 8-quarter (24m) window constant', () => {
-    expect(DEVIATION_WINDOW_QUARTERS).toBe(8)
-    expect(DEVIATION_WINDOW_MONTHS).toBe(24)
-  })
-
-  test('counts 0, 1, and 2 noted entries within the window', () => {
-    const base = Array.from({ length: 8 }, (_, i) => ({ period: `Q${(i % 4) + 1}`, rate: 1.0 }))
-    expect(countDeviationEvents(base)).toBe(0)
-    expect(formatDeviationStat(base)).toBe('0 / 24m')
-
-    const withOne = base.map((pt, i) => (i === 5 ? { ...pt, rate: 0.98, note: 'can shortage' } : pt))
-    expect(countDeviationEvents(withOne)).toBe(1)
-    expect(formatDeviationStat(withOne)).toBe('1 / 24m')
-
-    const withTwo = withOne.map((pt, i) => (i === 7 ? { ...pt, rate: 0.97, note: 'can shortage' } : pt))
-    expect(countDeviationEvents(withTwo)).toBe(2)
-    expect(formatDeviationStat(withTwo)).toBe('2 / 24m')
-  })
-
-  test('excludes a note just outside the window and includes the exact window boundary', () => {
-    const nineQuarters: RatePoint[] = [
-      { period: 'Q4 24', rate: 1.02, note: 'festive dev.' }, // index 0: 9th quarter back (outside 8q window)
-      { period: 'Q1 25', rate: 1.00 },
-      { period: 'Q2 25', rate: 1.00 },
-      { period: 'Q3 25', rate: 1.00 },
-      { period: 'Q4 25', rate: 1.00 },
-      { period: 'Q1 26', rate: 1.00 },
-      { period: 'Q2 26', rate: 1.00 },
-      { period: 'Q3 26', rate: 1.00 },
-      { period: 'Q4 26', rate: 1.00 },
-    ]
-    expect(countDeviationEvents(nineQuarters, 8)).toBe(0)
-    expect(formatDeviationStat(nineQuarters, 8)).toBe('0 / 24m')
-
-    // Moving the note to index 1 (8th quarter back) places it inside the 8q window
-    const atBoundary = nineQuarters.map((pt, i) =>
-      i === 0 ? { period: pt.period, rate: 1.00 } : i === 1 ? { ...pt, rate: 0.98, note: 'boundary' } : pt
-    )
-    expect(countDeviationEvents(atBoundary, 8)).toBe(1)
-    expect(formatDeviationStat(atBoundary, 8)).toBe('1 / 24m')
-
-    // Changing windowQuarters updates both the count and the months label together
-    expect(formatDeviationStat(atBoundary, 4)).toBe('0 / 12m')
-  })
-})
 
 test.describe('exchange section UI', () => {
   test.beforeEach(async ({ page }) => {
@@ -297,16 +244,20 @@ test('exchange stat: reacts to mocked rates.json instead of hard-coding 2 / 24m'
     { period: 'Q3 26', rate: 1.00 },
     { period: 'Q4 26', rate: 0.97, note: 'only one inside' },
   ]
-  await page.route('**/src/data/rates.json*', route =>
-    route.fulfill({
+  let routeHit = false
+  await page.route('**/src/data/rates.json*', route => {
+    routeHit = true
+    return route.fulfill({
       status: 200,
       contentType: 'application/javascript',
       body: `export default ${JSON.stringify(mockedRates)};`,
     })
-  )
+  })
   await page.goto('/')
   await page.waitForLoadState('networkidle')
   await page.locator('#rate').scrollIntoViewIfNeeded()
+
+  expect(routeHit).toBe(true)
 
   const deviationStat = page
     .locator('#rate .exchange-stat')
