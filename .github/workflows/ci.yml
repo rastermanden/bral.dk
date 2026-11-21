@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    # Pinned to ubuntu-24.04 because ubuntu-latest now resolves to ubuntu-26.04,
+    # which Playwright 1.59.1 `--with-deps` does not support yet.
+    # Switch back to ubuntu-latest once @playwright/test supports ubuntu-26.04.
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - run: npx playwright install --with-deps
+
+      - run: npm test

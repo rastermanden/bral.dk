@@ -11,7 +11,15 @@ test.beforeEach(async ({ page }) => {
 test('page has no horizontal overflow', async ({ page }) => {
   const bodyWidth = await page.evaluate(() => document.body.scrollWidth)
   const viewportWidth = page.viewportSize()!.width
-  expect(bodyWidth).toBeLessThanOrEqual(viewportWidth + 1)
+  expect(bodyWidth).toBe(viewportWidth)
+})
+
+test('header: no horizontal overflow at 390, 768, 1280, and 1440 px', async ({ page }) => {
+  for (const width of [390, 768, 1280, 1440]) {
+    await page.setViewportSize({ width, height: 900 })
+    const scrollWidth = await page.evaluate(() => document.body.scrollWidth)
+    expect(scrollWidth, `overflow at ${width}px`).toBe(width)
+  }
 })
 
 // ── Header ───────────────────────────────────────────────────────────────────
@@ -31,8 +39,46 @@ test('header: nav hidden on mobile, visible on tablet+', async ({ page }) => {
   }
 })
 
-test('header: Redeem button is always visible', async ({ page }) => {
-  await expect(page.locator('.header-cta')).toBeVisible()
+test('header: Redeem is reachable on every viewport', async ({ page }) => {
+  const viewport = page.viewportSize()!
+  if (viewport.width <= 640) {
+    await expect(page.locator('.header-cta')).toBeHidden()
+    await expect(page.locator('.hamburger')).toBeVisible()
+    await page.locator('.hamburger').click()
+    await expect(page.locator('.mobile-menu-cta')).toBeVisible()
+  } else {
+    await expect(page.locator('.header-cta')).toBeVisible()
+  }
+})
+
+test('header: tagline stays visible at 1440 px', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 })
+  await expect(page.locator('.header-tagline')).toBeVisible()
+})
+
+test('header: wraps to at most 2 nav rows at 768 and 1024 px and anchor jumps clear sticky header', async ({ page }) => {
+  for (const width of [768, 1024]) {
+    await page.setViewportSize({ width, height: 900 })
+    const metrics = await page.evaluate(() => {
+      const header = document.querySelector('.site-header')!
+      const links = Array.from(document.querySelectorAll('.header-nav a'))
+      const rows = new Set(links.map(el => Math.round(el.getBoundingClientRect().top / 4) * 4))
+      return {
+        headerHeight: header.getBoundingClientRect().height,
+        rowCount: rows.size,
+      }
+    })
+    expect(metrics.rowCount, `nav rows at ${width}px`).toBeLessThanOrEqual(2)
+    expect(metrics.headerHeight, `header height at ${width}px`).toBeLessThanOrEqual(84)
+
+    await page.locator('.header-nav a[href="#rate"]').click()
+    const jump = await page.evaluate(() => {
+      const headerBottom = document.querySelector('.site-header')!.getBoundingClientRect().bottom
+      const headingTop = document.querySelector('#rate h2, #rate .section-title, #rate')!.getBoundingClientRect().top
+      return { headerBottom, headingTop }
+    })
+    expect(jump.headingTop, `heading obscured by sticky header at ${width}px`).toBeGreaterThanOrEqual(jump.headerBottom - 1)
+  }
 })
 
 // ── Hero ─────────────────────────────────────────────────────────────────────

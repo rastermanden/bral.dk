@@ -70,7 +70,7 @@ onUnmounted(() => document.removeEventListener('keydown', onKeydown))
   padding: 14px 24px;
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 16px;
   font-size: 11px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -87,12 +87,22 @@ onUnmounted(() => document.removeEventListener('keydown', onKeydown))
   text-decoration: none;
   color: inherit;
 }
-.header-tagline { opacity: 0.78; white-space: nowrap; }
+.header-tagline {
+  opacity: 0.78;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  flex: 0 100 auto;
+}
 .header-nav {
   margin-left: auto;
   display: flex;
-  gap: 22px;
-  flex-wrap: nowrap;
+  gap: 6px 14px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  min-width: 0;
+  flex: 0 1 auto;
 }
 .header-nav a { white-space: nowrap; }
 
@@ -163,11 +173,12 @@ onUnmounted(() => document.removeEventListener('keydown', onKeydown))
 .menu-enter-from, .menu-leave-to { opacity: 0; transform: translateY(-8px); }
 
 @media (max-width: 1024px) {
-  .header-nav { gap: 14px; }
+  .header-tagline { display: none; }
+  .header-nav { gap: 4px 12px; }
 }
 @media (max-width: 768px) {
-  .header-tagline { display: none; }
-  .header-nav { gap: 10px; font-size: 10px; }
+  .site-header { padding: 12px 16px; gap: 12px; }
+  .header-nav { gap: 4px 8px; font-size: 9.5px; letter-spacing: 0.06em; }
 }
 @media (max-width: 640px) {
   .site-header { gap: 16px; }

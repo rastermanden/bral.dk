@@ -75,29 +75,72 @@
         <div style="font-size:10px;letter-spacing:0.3em;text-transform:uppercase;opacity:0.78;margin-bottom:8px">Historical Rate · BRAL / BEER</div>
         <div class="serif" style="font-size:34px;line-height:1.1;margin-bottom:28px">Stability, <em>by design</em>.</div>
 
-        <svg viewBox="0 0 400 180" width="100%" height="200" style="border:1px solid var(--ink);background:var(--paper-2)">
-          <g v-for="r in gridLines" :key="r">
-            <line x1="40" x2="400" :y1="yPos(r)" :y2="yPos(r)" stroke="var(--ink)" stroke-width="0.3" :stroke-dasharray="r === 1 ? '0' : '2 2'" :opacity="r === 1 ? 0.9 : 0.3" />
-            <text x="4" :y="yPos(r) + 3" font-size="8" font-family="JetBrains Mono" fill="var(--ink)" opacity="0.6">{{ r.toFixed(2) }}</text>
-          </g>
+        <div class="exchange-chart-frame">
+          <svg class="exchange-chart-svg" aria-hidden="true" focusable="false" viewBox="0 0 400 180">
+            <g v-for="r in gridLines" :key="r">
+              <line x1="40" x2="400" :y1="yPos(r)" :y2="yPos(r)" stroke="var(--ink)" stroke-width="0.3" :stroke-dasharray="r === 1 ? '0' : '2 2'" :opacity="r === 1 ? 0.9 : 0.3" />
+              <text x="4" :y="yPos(r) + 3" font-size="8" font-family="JetBrains Mono" fill="var(--ink)" opacity="0.6">{{ r.toFixed(2) }}</text>
+            </g>
 
-          <path :d="linePath" fill="none" stroke="var(--accent)" stroke-width="1.6" />
+            <path :d="linePath" fill="none" stroke="var(--accent)" stroke-width="1.6" />
 
-          <g v-for="(pt, i) in chartPoints" :key="i">
-            <circle :cx="pt.x" :cy="pt.y" r="2.5" fill="var(--accent)" />
-            <text :x="pt.x" y="175" font-size="7.5" font-family="JetBrains Mono" text-anchor="middle" fill="var(--ink)" opacity="0.7">{{ pt.period }}</text>
-            <text v-if="pt.note" :x="pt.x" :y="pt.y - 8" font-size="7" font-family="JetBrains Mono" text-anchor="middle" fill="var(--ink)" opacity="0.85">{{ pt.note }}</text>
-          </g>
-        </svg>
+            <g v-for="(pt, i) in chartPoints" :key="pt.period">
+              <circle class="chart-dot" :data-period="pt.period" :cx="pt.x" :cy="pt.y" r="2.5" fill="var(--accent)" />
+              <text
+                class="chart-period"
+                :class="{ 'chart-period--secondary': !pt.showOnMobile }"
+                :data-period="pt.period"
+                :x="pt.x"
+                y="174"
+                font-family="JetBrains Mono"
+                text-anchor="middle"
+                fill="var(--ink)"
+                opacity="0.7"
+              >{{ pt.period }}</text>
+              <text
+                v-if="pt.note"
+                class="chart-note"
+                :data-period="pt.period"
+                :x="pt.noteX"
+                :y="pt.noteY"
+                font-family="JetBrains Mono"
+                :text-anchor="pt.noteAnchor"
+                fill="var(--ink)"
+                opacity="0.85"
+              >{{ pt.note }}</text>
+            </g>
+          </svg>
 
-        <div class="mono" style="font-size:10px;margin-top:12px;opacity:0.7">
-          † The Q3 25 deviation followed a regional aluminum-can shortage (the "Dry August"). Peg restored within 11 days by an emergency pull-tab strike.
+          <div class="sr-only">
+            <table>
+              <caption>Historical exchange rate, BRAL per BEER ({{ rates[0]?.period }}–{{ rates[rates.length - 1]?.period }})</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Period</th>
+                  <th scope="col">Rate (BRAL per BEER)</th>
+                  <th scope="col">Note</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="r in rates" :key="r.period">
+                  <th scope="row">{{ r.period }}</th>
+                  <td>{{ r.rate.toFixed(2) }}</td>
+                  <td>{{ r.note || 'Peg held' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="mono exchange-footnote" style="font-size:10px;margin-top:12px;opacity:0.7">
+          <div>† The Q3 25 deviation followed a regional aluminum-can shortage (the "Dry August"). Peg restored within 11 days by an emergency pull-tab strike.</div>
+          <div style="margin-top:6px">‡ In Q4 26 the can shortage returned. The Treasury has sanctioned an emergency pull-tab strike and the Board has ordered a compulsory beer relay ("ølstafet", alcohol-free acceptable) to replenish the reserve. The peg holds.</div>
         </div>
 
         <div style="display:grid;grid-template-columns:repeat(3,1fr);margin-top:22px;border:1px solid var(--ink)">
-          <div v-for="(stat, i) in chartStats" :key="stat.label" :style="{ padding:'12px 14px', borderLeft: i===0 ? 'none' : '1px solid var(--ink)' }">
-            <div style="font-size:9px;letter-spacing:0.15em;text-transform:uppercase;opacity:0.78">{{ stat.label }}</div>
-            <div class="serif" style="font-size:22px;line-height:1.1;margin-top:2px">{{ stat.value }}</div>
+          <div v-for="(stat, i) in chartStats" :key="stat.label" class="exchange-stat" :style="{ padding:'12px 14px', borderLeft: i===0 ? 'none' : '1px solid var(--ink)' }">
+            <div class="exchange-stat-label" style="font-size:9px;letter-spacing:0.15em;text-transform:uppercase;opacity:0.78">{{ stat.label }}</div>
+            <div class="serif exchange-stat-value" style="font-size:22px;line-height:1.1;margin-top:2px">{{ stat.value }}</div>
           </div>
         </div>
       </div>
@@ -109,6 +152,7 @@
 import { ref, computed } from 'vue'
 import SectionHead from './SectionHead.vue'
 import rates from '../data/rates.json'
+import { DEVIATION_WINDOW_QUARTERS, formatDeviationStat } from '../utils/exchangeStats.js'
 
 const mode   = ref('bralToBeer')
 const amount = ref(12)
@@ -131,26 +175,62 @@ function fmt(n) {
 
 const gridLines = [0.9, 0.95, 1.0, 1.05, 1.1]
 
-function yPos(r) { return 180 - ((r - 0.9) / 0.2) * 160 - 10 }
+function yPos(r) { return 160 - ((r - 0.9) / 0.2) * 144 }
+
+const mobileLabelIndices = computed(() => {
+  const chosen = new Set()
+  rates.forEach((r, i) => {
+    if (r.note) chosen.add(i)
+  })
+  const canAdd = (idx) => {
+    for (const c of chosen) {
+      if (Math.abs(c - idx) < 2) return false
+    }
+    return true
+  }
+  if (rates.length > 0 && canAdd(0)) chosen.add(0)
+  if (rates.length > 1 && canAdd(rates.length - 1)) chosen.add(rates.length - 1)
+  for (let i = 0; i < rates.length; i++) {
+    if (!chosen.has(i) && canAdd(i)) chosen.add(i)
+  }
+  return chosen
+})
 
 const chartPoints = computed(() =>
-  rates.map((r, i) => ({
-    x:      40 + (i / (rates.length - 1)) * 350,
-    y:      yPos(r.rate),
-    period: r.period,
-    note:   r.note,
-  }))
+  rates.map((r, i) => {
+    const x = rates.length > 1 ? 46 + (i / (rates.length - 1)) * 336 : 214
+    const y = yPos(r.rate)
+    const isFirst = i === 0
+    const isLast = i === rates.length - 1
+    const noteAnchor = isFirst ? 'start' : isLast ? 'end' : 'middle'
+    const noteX = isFirst ? x - 2 : isLast ? x + 4 : x
+    const noteY = r.rate < 1 ? y + 13 : y - 8
+    return {
+      x,
+      y,
+      period: r.period,
+      note: r.note,
+      noteX,
+      noteY,
+      noteAnchor,
+      showOnMobile: mobileLabelIndices.value.has(i),
+    }
+  })
 )
 
 const linePath = computed(() =>
   chartPoints.value.map((pt, i) => `${i === 0 ? 'M' : 'L'} ${pt.x} ${pt.y}`).join(' ')
 )
 
-const chartStats = [
+const deviationStatValue = computed(() =>
+  formatDeviationStat(rates, DEVIATION_WINDOW_QUARTERS)
+)
+
+const chartStats = computed(() => [
   { label: '30D VOLATILITY',     value: '0.00%' },
-  { label: 'DEVIATION EVENTS',   value: '1 / 24m' },
+  { label: 'DEVIATION EVENTS',   value: deviationStatValue.value },
   { label: 'REDEMPTION SUCCESS', value: '100%' },
-]
+])
 </script>
 
 <style scoped>
@@ -159,6 +239,42 @@ const chartStats = [
   display: grid;
   grid-template-columns: 1.1fr 1fr;
   gap: 0;
+}
+.exchange-chart-frame {
+  position: relative;
+  container-type: inline-size;
+  container-name: exchange-chart;
+}
+.exchange-chart-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 400 / 180;
+  border: 1px solid var(--ink);
+  background: var(--paper-2);
+}
+.chart-period { font-size: 7px; }
+.chart-note { font-size: 7px; }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@container exchange-chart (max-width: 440px) {
+  .chart-period--secondary { display: none; }
+  .chart-period { font-size: 8.5px; }
+  .chart-note { font-size: 8px; }
+}
+@container exchange-chart (max-width: 305px) {
+  .chart-period { font-size: 9.5px; }
+  .chart-note { font-size: 9px; }
 }
 
 @media (max-width: 1024px) {
