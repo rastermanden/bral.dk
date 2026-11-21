@@ -11,6 +11,7 @@
   --grid-line: rgba(26, 23, 20, 0.08);
   --focus-ring: var(--accent);
   --muted-opacity: 0.78;
+  --header-offset: 80px;
 }
 
 /* Palette overrides */
@@ -69,6 +70,7 @@ body {
 }
 
 *, *::before, *::after { box-sizing: border-box; }
+section[id] { scroll-margin-top: var(--header-offset); }
 
 .serif { font-family: 'Instrument Serif', 'Times New Roman', serif; font-weight: 400; letter-spacing: -0.01em; }
 .mono  { font-family: 'JetBrains Mono', monospace; }
